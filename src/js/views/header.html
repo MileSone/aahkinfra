@@ -1,0 +1,22 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-flex-bar-start">
+   <oj-button id="drawerToggleButton"  chroming="half" display="icons">
+     <span slot="startIcon" class="oj-fwk-icon oj-fwk-icon-hamburger"></span>
+     <span>Navigation Drawer</span>
+   </oj-button>
+</div>
+<div role="heading" class="oj-hybrid-applayout-bar-title">
+   <h1 class="oj-hybrid-applayout-header-title" data-bind="text: pageTitle"></h1>
+    <!--<i class="oj-navigationlist-item-icon demo-icon-font-24 demo-logoheader-icon" style="-webkit-text-fill-color: white;"></i>-->
+</div>
+<!--<div class="oj-flex-bar-end">
+    Add additional buttons here
+</div>-->
+    <div class="oj-flex-bar-end">
+        <div data-bind="click: logout">
+            <i class="oj-navigationlist-item-icon fa fa-sign-out demo-icon-font-24 demo-logout" style="-webkit-text-fill-color: white;"></i>
+        </div>
+    </div>
