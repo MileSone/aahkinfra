@@ -62,15 +62,14 @@ require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
           var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=yes', {
               clearsessioncache: false,
               clearcache: false});
-          browser.addEventListener("exit", function (url) {
+          browser.addEventListener("loadstop", function (url) {
               console.log('url is' + JSON.stringify(url));
-            //    if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')){
+                if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')){
                   $.ajax({
                       url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
                       dataType: "script",
                       success: function () {
-                          browser.close();
-
+                        browser.close();
                           oj.Router.sync().then(
                               function () {
                                   // Bind your ViewModel for the content of the whole page body.
@@ -82,7 +81,7 @@ require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
                           );
                       }
                   });
-            //    }
+                }
           });
 
           self.logout = function () {
