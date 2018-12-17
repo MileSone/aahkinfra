@@ -2,7 +2,7 @@
 
 ojet 4.1
 
-git restore
+git restore (I think you meant ojet restore)
 
 cd hybird
 

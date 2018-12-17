@@ -11,56 +11,56 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController'],
     function AboutViewModel() {
       var self = this;
 
-      // Header Config
-      self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
+    //   // Header Config
+    //   self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
 
 
-      var baggageURL = "https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui?pageid=visualAnalyzer&reportpath=%2Fshared%2FEAP%2FBaggage";
+    //   var baggageURL = "https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui?pageid=visualAnalyzer&reportpath=%2Fshared%2FEAP%2FBaggage";
 
-        var options = {
-            toolbarColor: '#FFFFFF', // Background color of the toolbar in #RRGGBB
-            toolbarHeight: '40',
-            closeButtonText: '< Back To Charts',
-            closeButtonSize: '25',
-            closeButtonColor: '#0a47a2',
-            openHidden: false
-        };
+    //     var options = {
+    //         toolbarColor: '#FFFFFF', // Background color of the toolbar in #RRGGBB
+    //         toolbarHeight: '40',
+    //         closeButtonText: '< Back To Charts',
+    //         closeButtonSize: '25',
+    //         closeButtonColor: '#0a47a2',
+    //         openHidden: false
+    //     };
 
-        if( window.cordova && cordova.platformId === "android" ) {
-            var browser = window.inAppBrowserXwalk.open(baggageURL, options);
+    //     if( window.cordova && cordova.platformId === "android" ) {
+    //         var browser = window.inAppBrowserXwalk.open(baggageURL, options);
 
-            browser.addEventListener("loadstart", function ( url ) {
-                console.log(url);
-            });
+    //         browser.addEventListener("loadstart", function ( url ) {
+    //             console.log(url);
+    //         });
 
-            browser.addEventListener("loadstop", function ( url ) {
-                console.log(url);
-            });
+    //         browser.addEventListener("loadstop", function ( url ) {
+    //             console.log(url);
+    //         });
 
-            browser.addEventListener("exit", function () {
-                console.log("browser closed");
-                $.ajax({
-                    url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
-                    dataType: "script",
-                    success: function () {
+    //         browser.addEventListener("exit", function () {
+    //             console.log("browser closed");
+    //             $.ajax({
+    //                 url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
+    //                 dataType: "script",
+    //                 success: function () {
 
-                        oj.Router.sync().then(
-                            function () {
-                              console.log("%%%%%%%%%%%%done");
-                                // Bind your ViewModel for the content of the whole page body.
-                                ko.applyBindings(app, document.getElementById('globalBody'));
-                            },
-                            function (error) {
-                                oj.Logger.error('Error in root start: ' + error.message);
-                            }
-                        );
-                    }
-                });
-            });
-        }
-        else {
-            window.open(baggageURL, "_blank");
-        }
+    //                     oj.Router.sync().then(
+    //                         function () {
+    //                           console.log("%%%%%%%%%%%%done");
+    //                             // Bind your ViewModel for the content of the whole page body.
+    //                             ko.applyBindings(app, document.getElementById('globalBody'));
+    //                         },
+    //                         function (error) {
+    //                             oj.Logger.error('Error in root start: ' + error.message);
+    //                         }
+    //                     );
+    //                 }
+    //             });
+    //         });
+    //     }
+    //     else {
+    //         window.open(baggageURL, "_blank");
+    //     }
 
       // Below are a subse
         // t of the ViewModel methods invoked by the ojModule binding

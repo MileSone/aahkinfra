@@ -10,7 +10,6 @@
     "author": "Apache Cordova Team",
     "license": "Apache-2.0",
     "dependencies": {
-        "com.shoety.cordova.plugin.inappbrowserxwalk": "git+https://github.com/Shoety/cordova-plugin-inappbrowserxwalk.git",
         "cordova-browser": "5.0.4",
         "cordova-ios": "^4.5.5",
         "cordova-plugin-inappbrowser": "^3.0.0",
@@ -22,7 +21,6 @@
             "cordova-plugin-camera": {},
             "cordova-plugin-android-fingerprint-auth": {},
             "cordova-plugin-touch-id": {},
-            "com.shoety.cordova.plugin.inappbrowserxwalk": {},
             "cordova-plugin-inappbrowser": {}
         },
         "platforms": [
