@@ -16,7 +16,6 @@ define(['ojs/ojcore', 'jquery'],
         self.errMsg = "";
         
         self.response;
-        
     }
     
     return new appVariablesModel();

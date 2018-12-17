@@ -9,40 +9,40 @@
  */
 
 requirejs.config(
-{
-  baseUrl: 'js',
-
-  // Path mappings for the logical module names
-  // Update the main-release-paths.json for release mode when updating the mappings
-  paths:
-  //injector:mainReleasePaths
-  {
-    'knockout': 'libs/knockout/knockout-3.4.0.debug',
-    'jquery': 'libs/jquery/jquery-3.1.1',
-    'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0',
-    'promise': 'libs/es6-promise/es6-promise',
-    'hammerjs': 'libs/hammer/hammer-2.0.8',
-    'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0',
-    'ojs': 'libs/oj/v4.1.0/debug',
-    'ojL10n': 'libs/oj/v4.1.0/ojL10n',
-    'ojtranslations': 'libs/oj/v4.1.0/resources',
-    'text': 'libs/require/text',
-    'signals': 'libs/js-signals/signals',
-    'customElements': 'libs/webcomponents/custom-elements.min',
-    'proj4': 'libs/proj4js/dist/proj4-src',
-    'css': 'libs/require-css/css',
-  }
-  //endinjector
-  ,
-  // Shim configurations for modules that do not expose AMD
-  shim:
-  {
-    'jquery':
     {
-      exports: ['jQuery', '$']
+        baseUrl: 'js',
+
+        // Path mappings for the logical module names
+        // Update the main-release-paths.json for release mode when updating the mappings
+        paths:
+        //injector:mainReleasePaths
+            {
+                'knockout': 'libs/knockout/knockout-3.4.0.debug',
+                'jquery': 'libs/jquery/jquery-3.1.1',
+                'jqueryui-amd': 'libs/jquery/jqueryui-amd-1.12.0',
+                'promise': 'libs/es6-promise/es6-promise',
+                'hammerjs': 'libs/hammer/hammer-2.0.8',
+                'ojdnd': 'libs/dnd-polyfill/dnd-polyfill-1.0.0',
+                'ojs': 'libs/oj/v4.1.0/debug',
+                'ojL10n': 'libs/oj/v4.1.0/ojL10n',
+                'ojtranslations': 'libs/oj/v4.1.0/resources',
+                'text': 'libs/require/text',
+                'signals': 'libs/js-signals/signals',
+                'customElements': 'libs/webcomponents/custom-elements.min',
+                'proj4': 'libs/proj4js/dist/proj4-src',
+                'css': 'libs/require-css/css',
+            }
+        //endinjector
+        ,
+        // Shim configurations for modules that do not expose AMD
+        shim:
+            {
+                'jquery':
+                    {
+                        exports: ['jQuery', '$']
+                    }
+            }
     }
-  }
-}
 );
 
 /**
@@ -52,55 +52,102 @@ requirejs.config(
  * objects in the callback
  */
 require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
-'ojs/ojmodule', 'ojs/ojrouter', 'ojs/ojnavigationlist'],
-  function (oj, ko, app) { // this callback gets executed when all required modules are loaded
-    
-    // self.isLoading = ko.observable(false);
-    $(function() {
+        'ojs/ojmodule', 'ojs/ojrouter', 'ojs/ojnavigationlist'],
+    function (oj, ko, app) { // this callback gets executed when all required modules are loaded
 
-      function init() {
-          var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=yes', {
-              clearsessioncache: false,
-              clearcache: false});
-          browser.addEventListener("loadstop", function (url) {
-              console.log('url is' + JSON.stringify(url));
-                if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')){
-                  $.ajax({
-                      url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
-                      dataType: "script",
-                      success: function () {
-                        browser.close();
-                          oj.Router.sync().then(
-                              function () {
-                                  // Bind your ViewModel for the content of the whole page body.
-                                  ko.applyBindings(app, document.getElementById('globalBody'));
-                              },
-                              function (error) {
-                                  oj.Logger.error('Error in root start: ' + error.message);
-                              }
-                          );
-                      }
-                  });
-                }
-          });
+        // self.isLoading = ko.observable(false);
+        $(function () {
 
-          self.logout = function () {
-              if (confirm("logout ?"))
-              {
-                  // app.isLoggedIn(false);
-                  oj.Router.rootInstance.go('login');
-              }
-          };
-      }
+            function init() {
+                oj.Router.sync().then(
+                    function () {
+                        app.isLoading(true);
+                        var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=yes', {
+                            clearsessioncache: false,
+                            clearcache: false
+                        });
+                        browser.addEventListener("loadstop", function (url) {
+                            console.log('url is' + JSON.stringify(url));
+                            if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')) {
+                                $.ajax({
+                                    url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
+                                    dataType: "script",
+                                    success: function () {
+                                        browser.close();
+                                        browser = undefined;
 
-      // If running in a hybrid (e.g. Cordova) environment, we need to wait for the deviceready 
-      // event before executing any code that might interact with Cordova APIs or plugins.
-      if ($(document.body).hasClass('oj-hybrid')) {
-        document.addEventListener("deviceready", init);
-      } else {
-        init();
-      }
+                                        // Bind your ViewModel for the content of the whole page body.
+                                        ko.applyBindings(app, document.getElementById('globalBody'));
 
-    });
-  }
+                                        setTimeout(function () {
+                                            oj.Router.rootInstance.go('dashboard');
+                                        }, 2000);
+                                    },
+                                    error:function () {
+                                        app.isLoading(false);
+                                    }
+                                });
+                            }
+                        });
+
+                    },
+                    function (error) {
+                        app.isLoading(false);
+                        oj.Logger.error('Error in root start: ' + error.message);
+                    }
+                );
+
+                self.logout = function () {
+                    if (confirm("logout ?")) {
+                        // app.isLoggedIn(false);
+                        oj.Router.rootInstance.go('browserLogin');
+                    }
+                };
+                // setTimeout(function(){
+                // var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=yes', {
+                //     clearsessioncache: false,
+                //     clearcache: false});
+                //     browser.addEventListener("loadstop", function (url) {
+                //     console.log('url is' + JSON.stringify(url));
+                //     if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')){
+                //
+                //         $.ajax({
+                //             url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
+                //             dataType: "script",
+                //             success: function () {
+                //                 browser.close();
+                //                 browser = undefined;
+                //                     oj.Router.sync().then(
+                //                         function () {
+                //                             // Bind your ViewModel for the content of the whole page body.
+                //                             ko.applyBindings(app, document.getElementById('globalBody'));
+                //
+                //                             setTimeout(function(){
+                //                                 oj.Router.rootInstance.go('dashboard');
+                //                             },1000);
+                //
+                //                         },
+                //                         function (error) {
+                //                             oj.Logger.error('Error in root start: ' + error.message);
+                //                         }
+                //                     );
+                //             }
+                //         });
+                //     }
+                // });
+                // },1000);
+
+
+            }
+
+            // If running in a hybrid (e.g. Cordova) environment, we need to wait for the deviceready
+            // event before executing any code that might interact with Cordova APIs or plugins.
+            if ($(document.body).hasClass('oj-hybrid')) {
+                document.addEventListener("deviceready", init);
+            } else {
+                init();
+            }
+
+        });
+    }
 );

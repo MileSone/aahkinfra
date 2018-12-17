@@ -5,17 +5,16 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'appController'],
- function(oj, ko, $, app) {
+define(['ojs/ojcore', 'knockout', 'jquery', 'appController','data/appVariables'],
+ function(oj, ko, $, app , appVar) {
   
     function DashboardViewModel() {
       var self = this;
 
       // Header Config
       self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
-      
-      // Below are a subset of the ViewModel methods invoked by the ojModule binding
-      // Please reference the ojModule jsDoc for additional available methods.
+
+
       /**
        * Optional ViewModel method invoked when this ViewModel is about to be
        * used for the View transition.  The application can put data fetch logic
@@ -29,6 +28,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController'],
        */
       self.handleActivated = function(info) {
         // Implement if needed
+          setTimeout(function(){
+              app.isLoading(false);
+          },1000);
       };
 
       /**
@@ -41,7 +43,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController'],
        * @param {boolean} info.fromCache - A boolean indicating whether the module was retrieved from cache.
        */
       self.handleAttached = function(info) {
-        // Implement if needed
+
       };
 
 
