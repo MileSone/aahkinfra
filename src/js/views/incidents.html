@@ -15,12 +15,14 @@
   <!-- This is where your main page content will be loaded -->
   <div class="oj-applayout-content">
     <div role="main" class="oj-hybrid-applayout-content">
-      <div class="">
-        <div style="position: absolute; width: 100%; height: calc(100% - 120px)" >
-          <oracle-dv project-path="/shared/EAP/Passenger" project-options='{"bDisableMobileLayout":true, "bShowFilterBar":false}'>
+        <div style="position: absolute; width: 100%; height: 100%;" >
+          <oracle-dv project-path="/shared/EAP/Baggage" project-options='{"bDisableMobileLayout":true, "bShowFilterBar":false}'>
           </oracle-dv>
         </div>
-      </div>
+        <div style="position: absolute; width: 100%; top:100%; height: 1200px;" >
+          <oracle-dv project-path="/shared/EAP/Passenger" project-options='{"bDisableMobileLayout":true, "bShowFilterBar":false}'>
+          </oracle-dv>
+        </div>        
     </div>
   </div>
 </div>

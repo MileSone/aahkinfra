@@ -62,7 +62,7 @@ require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
                 oj.Router.sync().then(
                     function () {
                         app.isLoading(true);
-                        var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=yes', {
+                        var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=false', {
                             clearsessioncache: false,
                             clearcache: false
                         });

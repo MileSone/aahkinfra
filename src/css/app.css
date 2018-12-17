@@ -502,3 +502,7 @@ html{
     border-width: 0 0 0px 0 !important;
 
 }
+
+.oj-navigationlist-app-level.oj-navigationlist-horizontal .oj-navigationlist-item-label {
+    font-size: 0.625rem !important;
+}
