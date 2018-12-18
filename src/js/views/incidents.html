@@ -15,7 +15,12 @@
   <!-- This is where your main page content will be loaded -->
   <div class="oj-applayout-content">
     <div role="main" class="oj-hybrid-applayout-content">
-        <div class="dv_containor1" data-bind="html: dvhtml">
+        <div data-bind="foreach: dataSource">
+            <div style="position: relative; width: 100%;" data-bind="style: { height: height}">
+                <oracle-dv  data-bind="attr: { 'project-path': path}"
+                            project-options='{"bDisableMobileLayout":true, "bShowFilterBar":false}'>
+                </oracle-dv>
+            </div>
         </div>
     </div>
   </div>

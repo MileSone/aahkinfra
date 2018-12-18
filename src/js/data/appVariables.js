@@ -21,60 +21,60 @@ define(['ojs/ojcore', 'jquery'],
                     {
                         "id": "project1",
                         "path": "/shared/EAP/Baggage",
-                        "height": "100%",
+                        "height": "100vh",
                     },
                     {
                         "id": "project2",
                         "path": "/shared/EAP/Baggage",
-                        "height": "100%",
+                        "height": "100vh",
                     }
                 ],
                 "apron": [
                     {
                         "id": "project1",
                         "path": "/shared/EAP/Baggage1",
-                        "height": "100%",
+                        "height": "100vh",
                     },
                     {
                         "id": "project2",
                         "path": "/shared/EAP/Baggage",
-                        "height": "100%",
+                        "height": "100vh",
                     }
                 ],
                 "flight": [
                     {
                         "id": "project1",
                         "path": "/shared/EAP/Baggage2",
-                        "height": "100%",
+                        "height": "100vh",
                     },
                     {
                         "id": "project2",
                         "path": "/shared/EAP/Baggage",
-                        "height": "100%",
+                        "height": "100vh",
                     }
                 ],
                 "lt": [
                     {
                         "id": "project1",
                         "path": "/shared/EAP/Baggage3",
-                        "height": "100%",
+                        "height": "100vh",
                     },
                     {
                         "id": "project2",
                         "path": "/shared/EAP/Baggage",
-                        "height": "100%",
+                        "height": "100vh",
                     }
                 ],
                 "ferry": [
                     {
                         "id": "project1",
                         "path": "/shared/EAP/Baggage4",
-                        "height": "100%",
+                        "height": "100vh",
                     },
                     {
                         "id": "project2",
                         "path": "/shared/EAP/Baggage",
-                        "height": "100%",
+                        "height": "100vh",
                     }
                 ],
             }

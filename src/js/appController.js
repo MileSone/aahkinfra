@@ -18,14 +18,14 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'ojs/ojknockout', 'ojs/oj
             self.router = oj.Router.rootInstance;
 
             self.router.configure({
-                'browserLogin': {label: 'Login', isDefault: true},
+                'browserLogin': {label: 'Login'},
                 'about': {label: 'about'},
                 'profile': {label: 'Land Transport'},
                 'login': {label: 'Login'},
                 'dashboard': {label: 'Baggage'},
                 'incidents': {label: 'Apron'},
                 'settings': {label: 'Settings'},
-                'ferry': {label: 'Ferry'},
+                'ferry': {label: 'Ferry', isDefault: true},
                 'customers': {label: 'Flight'}
             });
 

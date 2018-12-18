@@ -14,6 +14,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             // Header Config
             self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
             self.dvhtml = ko.observable();
+            self.dataSource = ko.observableArray();
 
             /**
              * Optional ViewModel method invoked when this ViewModel is about to be
@@ -39,17 +40,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
              * @param {boolean} info.fromCache - A boolean indicating whether the module was retrieved from cache.
              */
             self.handleAttached = function (info) {
-                $.ajax({
-                    url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
-                    dataType: "script",
-                    success: function () {
-                        // Bind your ViewModel for the content of the whole page body.
-                        // ko.applyBindings(self, document.getElementById('globalBody'));
-                    },
-                    function(error) {
-                        oj.Logger.error('Error in root start: ' + error.message);
-                    }
-                });
             };
 
 
@@ -62,23 +52,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
              * @param {Function} info.valueAccessor - The binding's value accessor.
              */
             self.handleBindingsApplied = function (info) {
-                // Implement if needed
-
-                //
                 var newHtmlString = "";
                 if (appVar.infraData.baggage) {
-                    var dataSource = appVar.infraData.baggage;
-                    dataSource.forEach(function (item) {
-                        console.log(item);
-                        var tempArray = new Array();
-                        tempArray[0] = '<div style="position:absolute;width:100%;height:' + item.height + '"><oracle-dv project-path="' + item.path + '"';
-                        tempArray[1] = "project-options='{";
-                        tempArray[2] = '"bDisableMobileLayout":true, "bShowFilterBar"';
-                        tempArray[3] = ":false}'></oracle-dv></div>";
-                        newHtmlString += tempArray.join("");
-                    });
-                    console.log(newHtmlString);
-                    self.dvhtml(newHtmlString);
+                    self.dataSource(appVar.infraData.baggage);
+                    // self.dataSource().forEach(function (item) {
+                    //     console.log(item);
+                    //     var tempArray = new Array();
+                    //     tempArray[0] = '<div style="position:absolute;width:100%;height:' + item.height + '"><oracle-dv id="' + item.id + '" project-path="' + item.path + '"';
+                    //     tempArray[1] = " project-options='{";
+                    //     tempArray[2] = '"bDisableMobileLayout":true, "bShowFilterBar"';
+                    //     tempArray[3] = ":false}'></oracle-dv></div>";
+                    //     newHtmlString += tempArray.join("");
+                    // });
+                    // console.log(newHtmlString);
+                    // self.dvhtml(newHtmlString);
 
                     // document.getElementById("dvContainor1").innerHTML = newHtmlString;
                 }

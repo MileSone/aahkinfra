@@ -16,7 +16,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
             self.pageTitle = ko.observable("Settings");
             self.goBack = function () {
-                oj.Router.rootInstance.go('dashboard');
+                setTimeout(function () {
+                    oj.Router.rootInstance.go('dashboard');
+                },2000)
+
             }
 
             self.navlistValues = [

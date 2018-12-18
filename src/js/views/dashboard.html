@@ -3,25 +3,25 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 <div class="oj-hybrid-applayout-page">
-  <div class="oj-applayout-fixed-top">
-      <!--
-       ** Oracle JET V4.1.0 hybrid mobile application header pattern.
-       ** Please see the Oracle JET Cookbook App Shell: Hybrid Mobile demos for
-       ** more information on how to use this pattern.
-    -->
-    <header role="banner" class="oj-hybrid-applayout-header" data-bind="ojModule: headerConfig">
-    </header>
-  </div>
-  <!-- This is where your main page content will be loaded -->
-  <div class="oj-applayout-content">
-    <div role="main" class="oj-hybrid-applayout-content">
-      <div  data-bind="html: dvhtml">
-      </div>
-      <!--<div style="position: absolute; width: calc(100% - 40px); height: calc(100% - 40px)">-->
-        <!--<oracle-dv id="oracle-dv" project-path="/shared/EAP/Baggage" project-options='{"bDisableMobileLayout":true, "bShowFilterBar":false}'>-->
-        <!--</oracle-dv>-->
-      <!--</div>-->
-      <!--<div id="dvContainor1"> </div>-->
+    <div class="oj-applayout-fixed-top">
+        <!--
+         ** Oracle JET V4.1.0 hybrid mobile application header pattern.
+         ** Please see the Oracle JET Cookbook App Shell: Hybrid Mobile demos for
+         ** more information on how to use this pattern.
+      -->
+        <header role="banner" class="oj-hybrid-applayout-header" data-bind="ojModule: headerConfig">
+        </header>
     </div>
-  </div>
+    <!-- This is where your main page content will be loaded -->
+    <div class="oj-applayout-content">
+        <div role="main" class="oj-hybrid-applayout-content">
+            <div data-bind="foreach: dataSource">
+                <div style="position: relative; width: 100%;" data-bind="style: { height: height}">
+                <oracle-dv  data-bind="attr: { 'project-path': path}"
+                           project-options='{"bDisableMobileLayout":true, "bShowFilterBar":false}'>
+                </oracle-dv>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

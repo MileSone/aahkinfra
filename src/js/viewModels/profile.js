@@ -13,22 +13,8 @@ function(oj, ko, $, app, appVar) {
 
       // Header Config
       self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
-        self.dvhtml = ko.observable();
-        var newHtmlString = "";
-        if (appVar.infraData.lt) {
-            var dataSource = appVar.infraData.lt;
-            dataSource.forEach(function (item) {
-                console.log(item);
-                var tempArray = new Array();
-                tempArray[0] = '<div style="position:absolute;width:100%;height:' + item.height + '"><oracle-dv project-path="' + item.path + '"';
-                tempArray[1] = "project-options='{";
-                tempArray[2] = '"bDisableMobileLayout":true, "bShowFilterBar"';
-                tempArray[3] = ":false}'></oracle-dv></div>";
-                newHtmlString += tempArray.join("");
-            });
-            console.log(newHtmlString);
-            self.dvhtml(newHtmlString);
-        }
+        self.dataSource = ko.observableArray();
+
       self.handleActivated = function(info) {
         // Implement if needed
       };
@@ -56,7 +42,9 @@ function(oj, ko, $, app, appVar) {
        * @param {Function} info.valueAccessor - The binding's value accessor.
        */
       self.handleBindingsApplied = function(info) {
-        // Implement if needed
+          if (appVar.infraData.lt) {
+              self.dataSource(appVar.infraData.lt);
+          }
       };
 
       /*
