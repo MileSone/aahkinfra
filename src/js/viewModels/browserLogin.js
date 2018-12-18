@@ -34,7 +34,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController','ojs/ojbutton', 'ojs
                                     function () {
                                         // Bind your ViewModel for the content of the whole page body.
                                         ko.applyBindings(app, document.getElementById('globalBody'));
-                                        oj.Router.rootInstance.go('dashboard');
+                                        setTimeout(function () {
+                                            oj.Router.rootInstance.go('dashboard');
+                                        }, 2000);
                                     },
                                     function (error) {
                                         oj.Logger.error('Error in root start: ' + error.message);

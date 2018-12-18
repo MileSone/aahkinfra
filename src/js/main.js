@@ -59,6 +59,14 @@ require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
         $(function () {
 
             function init() {
+
+                self.logout = function () {
+                    if (confirm("logout ?")) {
+                        // app.isLoggedIn(false);
+                        oj.Router.rootInstance.go('browserLogin');
+                    }
+                };
+
                 oj.Router.sync().then(
                     function () {
                         app.isLoading(true);
@@ -66,9 +74,12 @@ require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
                             clearsessioncache: false,
                             clearcache: false
                         });
+
+
                         browser.addEventListener("loadstop", function (url) {
                             console.log('url is' + JSON.stringify(url));
                             if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')) {
+
                                 $.ajax({
                                     url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
                                     dataType: "script",
@@ -80,11 +91,12 @@ require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
                                         ko.applyBindings(app, document.getElementById('globalBody'));
 
                                         setTimeout(function () {
+                                            window.reload();
                                             oj.Router.rootInstance.go('dashboard');
                                         }, 2000);
                                     },
-                                    error:function () {
-                                        app.isLoading(false);
+                                    function(error) {
+                                        oj.Logger.error('Error in root start: ' + error.message);
                                     }
                                 });
                             }
@@ -97,13 +109,7 @@ require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
                     }
                 );
 
-                self.logout = function () {
-                    if (confirm("logout ?")) {
-                        // app.isLoggedIn(false);
-                        oj.Router.rootInstance.go('browserLogin');
-                    }
-                };
-                // setTimeout(function(){
+
                 // var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=yes', {
                 //     clearsessioncache: false,
                 //     clearcache: false});
@@ -124,18 +130,18 @@ require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
                 //
                 //                             setTimeout(function(){
                 //                                 oj.Router.rootInstance.go('dashboard');
-                //                             },1000);
-                //
+                //                             },2000);
                 //                         },
                 //                         function (error) {
                 //                             oj.Logger.error('Error in root start: ' + error.message);
                 //                         }
                 //                     );
-                //             }
+                //         }
                 //         });
+                //
+                //
                 //     }
                 // });
-                // },1000);
 
 
             }
