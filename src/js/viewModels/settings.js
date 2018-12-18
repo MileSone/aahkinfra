@@ -36,6 +36,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             self.saveAllItem = function () {
                 window.localStorage.setItem("infraData", JSON.stringify(self.ourData));
                 window.location.reload();
+                oj.Router.rootInstance.go('dashboard');
             };
 
             self.addFuncBindingHtml = function(sTab){
@@ -128,11 +129,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
 
             self.allItems = ko.observableArray([]);
             self.currentTab = ko.observable("Baggage");
+
+
             self.allItemsFunc = ko.computed(function () {
                 if (self.ourData) {
                     console.log(self.ourData);
                     // self.allItems
+
+                    console.log(self.allItems());
                     self.allItems([]);
+                    console.log(self.allItems());
 
                     var selectedPage = self.navvalue();
                     switch (selectedPage) {

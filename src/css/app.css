@@ -462,6 +462,16 @@ html{
     content:url("images/dash4.png");
 }
 
+.demo-dash5-icon{
+    content:url("images/dash5.png");
+}
+
+.oj-selected .demo-dash5-icon{
+    content:url("images/dash5_p.png");
+    background-color: #0a47a2!important;
+    border-color: #0a47a2!important;
+}
+
 
 .oj-selected .demo-dash4-icon{
     content:url("images/dash4_p.png");

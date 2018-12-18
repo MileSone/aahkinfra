@@ -13,21 +13,22 @@ function(oj, ko, $, app) {
 
       // Header Config
       self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
+        self.dvhtml = ko.observable();
+        var newHtmlString = "";
+        var tailHtmlString = "project-options='{'bDisableMobileLayout':true, 'bShowFilterBar':false}'></oracle-dv></div>"
+        if(appVar.infraData.baggage){
+            var dataSource = appVar.infraData.baggage;
+            dataSource.forEach(function(item){
+                console.log(item);
 
-      // Below are a subset of the ViewModel methods invoked by the ojModule binding
-      // Please reference the ojModule jsDoc for additional available .
 
-      /**
-       * Optional ViewModel method invoked when this ViewModel is about to be
-       * used for the View transition.  The application can put data fetch logic
-       * here that can return a Promise which will delay the handleAttached function
-       * call below until the Promise is resolved.
-       * @param {Object} info - An object with the following key-value pairs:
-       * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
-       * @param {Function} info.valueAccessor - The binding's value accessor.
-       * @return {Promise|undefined} - If the callback returns a Promise, the next phase (attaching DOM) will be delayed until
-       * the promise is resolved
-       */
+                newHtmlString += '<div style="position:absolute;width:100%;height:' + item.height + '">'
+                    + '<oracle-dv project-path="' + item.path + '"' + tailHtmlString;
+
+            });
+            console.log(newHtmlString);
+            self.dvhtml(newHtmlString);
+        }
       self.handleActivated = function(info) {
         // Implement if needed
       };

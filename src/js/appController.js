@@ -25,6 +25,7 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'ojs/ojknockout', 'ojs/oj
                 'dashboard': {label: 'Baggage'},
                 'incidents': {label: 'Apron'},
                 'settings': {label: 'Settings'},
+                'ferry': {label: 'Ferry'},
                 'customers': {label: 'Customers'}
             });
 
@@ -59,11 +60,11 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'ojs/ojknockout', 'ojs/oj
                     name: 'Flight', id: 'customers',
                     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-dash3-icon'
                 },
-                // {name: 'Flight', id: 'about',
-                //     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-dash3-icon'},
+                {name: 'Land Trans', id: 'profile',
+                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-dash4-icon'},
                 {
-                    name: 'Land Trans', id: 'profile',
-                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-dash4-icon'
+                    name: 'Ferry', id: 'ferry',
+                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-dash5-icon'
                 }];
 
             self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});
