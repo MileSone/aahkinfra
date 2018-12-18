@@ -5,29 +5,30 @@
 /*
  * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'appController'],
- function(oj, ko, $, app) {
+define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'],
+ function(oj, ko, $, app, appVar) {
   
     function CustomerViewModel() {
       var self = this;
       
       // Header Config
       self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
-
-      // Below are a subset of the ViewModel methods invoked by the ojModule binding
-      // Please reference the ojModule jsDoc for additional available methods.
-
-      /**
-       * Optional ViewModel method invoked when this ViewModel is about to be
-       * used for the View transition.  The application can put data fetch logic
-       * here that can return a Promise which will delay the handleAttached function
-       * call below until the Promise is resolved.
-       * @param {Object} info - An object with the following key-value pairs:
-       * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
-       * @param {Function} info.valueAccessor - The binding's value accessor.
-       * @return {Promise|undefined} - If the callback returns a Promise, the next phase (attaching DOM) will be delayed until
-       * the promise is resolved
-       */
+        self.dvhtml = ko.observable();
+        var newHtmlString = "";
+        if (appVar.infraData.flight) {
+            var dataSource = appVar.infraData.flight;
+            dataSource.forEach(function (item) {
+                console.log(item);
+                var tempArray = new Array();
+                tempArray[0] = '<div style="position:absolute;width:100%;height:' + item.height + '"><oracle-dv project-path="' + item.path + '"';
+                tempArray[1] = "project-options='{";
+                tempArray[2] = '"bDisableMobileLayout":true, "bShowFilterBar"';
+                tempArray[3] = ":false}'></oracle-dv></div>";
+                newHtmlString += tempArray.join("");
+            });
+            console.log(newHtmlString);
+            self.dvhtml(newHtmlString);
+        }
       self.handleActivated = function(info) {
         // Implement if needed
       };

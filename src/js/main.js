@@ -51,9 +51,8 @@ requirejs.config(
  * by the modules themselves), we are listing them explicitly to get the references to the 'oj' and 'ko'
  * objects in the callback
  */
-require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
-        'ojs/ojmodule', 'ojs/ojrouter', 'ojs/ojnavigationlist'],
-    function (oj, ko, app) { // this callback gets executed when all required modules are loaded
+require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewModels/dashboard'  ,'ojs/ojknockout', 'ojs/ojmodule', 'ojs/ojrouter', 'ojs/ojnavigationlist'],
+    function (oj, ko, app,appVar, dash) { // this callback gets executed when all required modules are loaded
 
         // self.isLoading = ko.observable(false);
         $(function () {
@@ -72,31 +71,50 @@ require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
                     oj.Router.rootInstance.go('settings');
                 };
 
+                // self.reCreateHMTL = function(){
+                //     var newHtmlString = "";
+                //     if (appVar.infraData.baggage) {
+                //         var dataSource = appVar.infraData.baggage;
+                //         dataSource.forEach(function (item) {
+                //             console.log(item);
+                //             var tempArray = new Array();
+                //             tempArray[0] = '<div style="position:absolute;width:100%;height:' + item.height + '"><oracle-dv project-path="' + item.path + '"';
+                //             tempArray[1] = "project-options='{";
+                //             tempArray[2] = '"bDisableMobileLayout":true, "bShowFilterBar"';
+                //             tempArray[3] = ":false}'></oracle-dv></div>";
+                //             newHtmlString += tempArray.join("");
+                //         });
+                //         console.log(newHtmlString);
+                //         // self.dvhtml(newHtmlString);
+                //         dash.initView(newHtmlString);
+                //
+                //     }
+                // };
+
                 oj.Router.sync().then(
                     function () {
-                    //     app.isLoading(true);
-                    //     var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=false', {
-                    //         clearsessioncache: false,
-                    //         clearcache: false
-                    //     });
-                    //
-                    //
-                    //     browser.addEventListener("loadstop", function (url) {
-                    //         console.log('url is' + JSON.stringify(url));
-                    //         if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')) {
-                    //
-                    //             $.ajax({
-                    //                 url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
-                    //                 dataType: "script",
-                    //                 success: function () {
-                    //                     browser.close();
-                    //                     browser = undefined;
+                        app.isLoading(true);
+                        // var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=false', {
+                        //     clearsessioncache: false,
+                        //     clearcache: false
+                        // });
 
+
+                        // browser.addEventListener("loadstop", function (url) {
+                        //     console.log('url is' + JSON.stringify(url));
+                        //     if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')) {
+                        //
+                        //         $.ajax({
+                        //             url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
+                        //             dataType: "script",
+                        //             success: function () {
+                        //                 browser.close();
+                        //                 browser = undefined;
+                        //                 self.reCreateHMTL();
                                         // Bind your ViewModel for the content of the whole page body.
                                         ko.applyBindings(app, document.getElementById('globalBody'));
-                        //
+
                         //                 setTimeout(function () {
-                        //                     window.reload();
                         //                     oj.Router.rootInstance.go('dashboard');
                         //                 }, 2000);
                         //             },
@@ -105,8 +123,8 @@ require(['ojs/ojcore', 'knockout', 'appController', 'ojs/ojknockout',
                         //             }
                         //         });
                         //     }
-                    //     });
-                    //
+                        // });
+
                     },
                     function (error) {
                         app.isLoading(false);

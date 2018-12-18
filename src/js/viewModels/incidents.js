@@ -5,8 +5,8 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'appController'],
- function(oj, ko, $, app) {
+define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'],
+ function(oj, ko, $, app, appVar) {
   
     function IncidentsViewModel() {
       var self = this;
@@ -16,23 +16,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController'],
 
         self.dvhtml = ko.observable();
         var newHtmlString = "";
-        var tailHtmlString = "project-options='{'bDisableMobileLayout':true, 'bShowFilterBar':false}'></oracle-dv></div>"
-        if(appVar.infraData.baggage){
-            var dataSource = appVar.infraData.baggage;
-            dataSource.forEach(function(item){
+        if (appVar.infraData.apron) {
+            var dataSource = appVar.infraData.apron;
+            dataSource.forEach(function (item) {
                 console.log(item);
-
-
-                newHtmlString += '<div style="position:absolute;width:100%;height:' + item.height + '">'
-                    + '<oracle-dv project-path="' + item.path + '"' + tailHtmlString;
-
+                var tempArray = new Array();
+                tempArray[0] = '<div style="position:absolute;width:100%;height:' + item.height + '"><oracle-dv project-path="' + item.path + '"';
+                tempArray[1] = "project-options='{";
+                tempArray[2] = '"bDisableMobileLayout":true, "bShowFilterBar"';
+                tempArray[3] = ":false}'></oracle-dv></div>";
+                newHtmlString += tempArray.join("");
             });
             console.log(newHtmlString);
             self.dvhtml(newHtmlString);
         }
-      self.handleActivated = function(info) {
-        // Implement if needed
-      };
 
       /**
        * Optional ViewModel method invoked after the View is inserted into the

@@ -20,13 +20,13 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'ojs/ojknockout', 'ojs/oj
             self.router.configure({
                 'browserLogin': {label: 'Login', isDefault: true},
                 'about': {label: 'about'},
-                'profile': {label: 'profile'},
+                'profile': {label: 'Land Transport'},
                 'login': {label: 'Login'},
                 'dashboard': {label: 'Baggage'},
                 'incidents': {label: 'Apron'},
                 'settings': {label: 'Settings'},
                 'ferry': {label: 'Ferry'},
-                'customers': {label: 'Customers'}
+                'customers': {label: 'Flight'}
             });
 
             oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();

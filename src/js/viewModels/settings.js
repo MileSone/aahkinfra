@@ -39,7 +39,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                 oj.Router.rootInstance.go('dashboard');
             };
 
-            self.addFuncBindingHtml = function(sTab){
+            self.addFuncBindingHtml = function (sTab) {
                 // console.log(sTab);
                 self.isOpenAddItemWindow(false);
                 var newData = new Array();
@@ -54,7 +54,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         }
                         newData.push(aObject);
                         self.allItems(newData);
-                        self.ourData.baggage =  newData;
+                        self.ourData.baggage = newData;
                         return false;
                     case 2:
                         newData = self.ourData.apron;
@@ -66,7 +66,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         }
                         newData.push(aObject);
                         self.allItems(newData);
-                        self.ourData.apron =  newData;
+                        self.ourData.apron = newData;
                         return false;
                     case 3:
                         newData = self.ourData.flight;
@@ -78,7 +78,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         }
                         newData.push(aObject);
                         self.allItems(newData);
-                        self.ourData.flight =  newData;
+                        self.ourData.flight = newData;
                         return false;
                     case 4:
                         newData = self.ourData.lt;
@@ -90,7 +90,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         }
                         newData.push(aObject);
                         self.allItems(newData);
-                        self.ourData.lt =  newData;
+                        self.ourData.lt = newData;
                         return false;
                     case 5:
                         newData = self.ourData.ferry;
@@ -102,12 +102,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         }
                         newData.push(aObject);
                         self.allItems(newData);
-                        self.ourData.ferry =  newData;
+                        self.ourData.ferry = newData;
                         return false;
                 }
             };
 
-            self.addComfirm = function (){
+            self.addComfirm = function () {
                 switch (self.currentTab()) {
                     case "Baggage":
                         self.addFuncBindingHtml(1);
@@ -129,17 +129,74 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
 
             self.allItems = ko.observableArray([]);
             self.currentTab = ko.observable("Baggage");
+            var singleClick = true;
 
 
-            self.allItemsFunc = ko.computed(function () {
+            self.singClickFunc = function(){
+                setTimeout(function () {
+                    singleClick = true;
+                },500);
+            }
+            self.valuechangehandler = function (e) {
+
+                if (singleClick == true) {
+                    singleClick = false;
+                    // console.log(e);
+                    if (self.ourData) {
+                        console.log(self.ourData);
+                        self.allItems([]);
+                        // var selectedPage = self.navvalue();
+                        switch (e.detail.value) {
+                            case "Baggage":
+                                self.currentTab("Baggage");
+                                self.allItems(self.ourData.baggage);
+                                self.singClickFunc();
+                                return false;
+                            case "Apron":
+                                self.currentTab("Apron");
+                                self.allItems(self.ourData.apron);
+                                self.singClickFunc();
+                                return false;
+                            case "Flight":
+                                self.currentTab("Flight");
+                                self.allItems(self.ourData.flight);
+                                self.singClickFunc();
+                                return false;
+                            case "Land Transport":
+                                self.currentTab("Land Transport");
+                                self.allItems(self.ourData.lt);
+                                self.singClickFunc();
+                                return false;
+                            case "Ferry":
+                                self.currentTab("Ferry");
+                                self.allItems(self.ourData.ferry);
+                                self.singClickFunc();
+                                return false;
+                        }
+                    } else {
+                        return self.allItems([
+                            {
+                                "id": "project1",
+                                "path": "/shared/EAP/Baggage",
+                                "height": "100%",
+                            },
+                            {
+                                "id": "project2",
+                                "path": "/shared/EAP/Baggage",
+                                "height": "100%",
+                            }
+                        ])
+                    }
+
+                }
+
+            }
+
+
+            self.allItemsFunc = function () {
                 if (self.ourData) {
                     console.log(self.ourData);
-                    // self.allItems
-
-                    console.log(self.allItems());
                     self.allItems([]);
-                    console.log(self.allItems());
-
                     var selectedPage = self.navvalue();
                     switch (selectedPage) {
                         case "Baggage":
@@ -172,7 +229,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         }
                     ])
                 }
-            }, self);
+            };
+
+            self.allItemsFunc();
 
             self.addItem = function () {
                 self.isOpenAddItemWindow(true);
@@ -290,7 +349,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
 
                 oj.SwipeToRevealUtils.tearDownSwipeActions(startOffcanvas);
                 oj.SwipeToRevealUtils.tearDownSwipeActions(endOffcanvas);
-
 
 
                 self.allItems.remove(function (current) {
