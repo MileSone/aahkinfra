@@ -565,3 +565,7 @@ html{
     z-index: 999;
     border-radius: 10px;
 }
+
+.oj-navigationlist-horizontal.oj-navigationlist-stack-icon-label:not(.oj-navigationlist-icon-only) .oj-navigationlist-item {
+    padding-bottom: 0px !important;
+}
