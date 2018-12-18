@@ -3,10 +3,13 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 <div class="oj-flex-bar-start">
-   <oj-button id="drawerToggleButton"  chroming="half" display="icons">
-     <span slot="startIcon" class="oj-fwk-icon oj-fwk-icon-hamburger"></span>
-     <span>Navigation Drawer</span>
-   </oj-button>
+    <div data-bind="click: goSettings">
+        <i class="oj-navigationlist-item-icon fa fa-sign-out demo-icon-font-22 demo-setting" style="-webkit-text-fill-color: white;"></i>
+    </div>
+   <!--<oj-button id="drawerToggleButton"  chroming="half" display="icons" >-->
+     <!--<span slot="startIcon" class="oj-fwk-icon oj-fwk-icon-hamburger"></span>-->
+     <!--<span>Navigation Drawer</span>-->
+   <!--</oj-button>-->
 </div>
 <div role="heading" class="oj-hybrid-applayout-bar-title">
    <h1 class="oj-hybrid-applayout-header-title" data-bind="text: pageTitle"></h1>

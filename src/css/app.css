@@ -386,6 +386,10 @@ html{
     text-align: center;
 }
 
+.demo-setting{
+    content:url("images/settingicon.png");
+}
+
 .demo-fp-icon{
     content:url("images/fp_btn.png");
 }
@@ -431,8 +435,9 @@ html{
 .demo-icon-font-24{
     width: 32px;
     height: 32px;
-    margin: 0px 0px 0px 1px;
+    margin: 0 auto;
 }
+
 .oj-selected  .demo-dash2-icon {
     content:url("images/dash2_p.png");
     background-color: #0a47a2!important;
@@ -476,6 +481,16 @@ html{
     content:url("images/logo.png");
 }
 
+.demo_backBtn{
+    content:url("images/backBtn.png");
+}
+
+.demo-icon-font-22 {
+    width: 26px;
+    height: 26px;
+    margin: 0px 0px 0px 1px;
+}
+
 .oj-selected .oj-navigationlist-focused-element{
     background-color: #0a47a2!important;
     border-color: #0a47a2!important;
@@ -501,4 +516,42 @@ html{
 .oj-navigationlist-horizontal:not(.oj-navigationlist-icon-only) .oj-navigationlist-item {
     border-width: 0 0 0px 0 !important;
 
+}
+
+.oj-navigationlist-app-level.oj-navigationlist-horizontal .oj-navigationlist-item-label {
+    font-size: 0.625rem !important;
+}
+
+
+
+#settingPage .oj-button-label{
+    font-size: 12px;
+}
+
+#settingPage .oj-button .oj-button-text {
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+#settingPage input.oj-button[type="button"],#settingPage input.oj-button[type="submit"], input.oj-button[type="reset"],#settingPage .oj-buttonset .oj-button-text-only .oj-button-text,#settingPage .oj-button-text-only .oj-button-text {
+    padding: 0px;
+}
+
+
+#navlistset{
+    width: calc( 100% - 20px );
+}
+
+.oj-inputtext-input{
+    border-bottom: 1px solid gray;
+}
+
+.bottomInputSession{
+    border: 1px solid gray;
+    padding: 10px;
+    background-color: #ffffff;
+    z-index: 999;
+    border-radius: 10px;
 }

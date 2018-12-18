@@ -1,0 +1,109 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-applayout-page" id="settingPage">
+    <div class="oj-applayout-fixed-top" style="position: relative;">
+        <!--
+         ** Oracle JET V4.1.0 hybrid mobile application header pattern.
+         ** Please see the Oracle JET Cookbook App Shell: Hybrid Mobile demos for
+         ** more information on how to use this pattern.
+      -->
+        <header role="banner" class="oj-hybrid-applayout-header" >
+            <div class="oj-flex-bar-start">
+                <div data-bind="click: goBack">
+                    <i class="oj-navigationlist-item-icon fa demo-icon-font-22 demo_backBtn" style="-webkit-text-fill-color: white;"></i>
+                </div>
+            </div>
+            <div role="heading" class="oj-hybrid-applayout-bar-title">
+                <h1 class="oj-hybrid-applayout-header-title" data-bind="text: pageTitle"></h1>
+                <!--<i class="oj-navigationlist-item-icon demo-icon-font-24 demo-logoheader-icon" style="-webkit-text-fill-color: white;"></i>-->
+            </div>
+        </header>
+    </div>
+    <!-- This is where your main page content will be loaded -->
+    <div class="oj-applayout-content">
+        <div role="main" class="oj-hybrid-applayout-content" style="margin-top: 7px;">
+
+            <div style="width: 100%;text-align: center">
+                <oj-buttonset-one id="navlistset" value="{{navvalue}}" focus-management="none">
+                    <!-- ko foreach: navlistValues -->
+                    <oj-option value="[[id]]">
+                        <span data-bind="text: label"></span>
+                    </oj-option>
+                    <!-- /ko -->
+                </oj-buttonset-one>
+            </div>
+
+            <div style="position: absolute;width: calc( 100% - 20px);padding: 10px;bottom: 80px;z-index: 99;">
+                <div class="bottomInputSession" data-bind="visible: isOpenAddItemWindow">
+                    <oj-label show-required for="input1">project path</oj-label>
+                    <oj-input-text id="input1" required value={{addPath}}></oj-input-text>
+                    <oj-label show-required for="input2">dv height</oj-label>
+                    <oj-input-text id="input2" required value={{addHeight}}></oj-input-text>
+
+                    <input id="submit3" type="submit" data-bind="click: addComfirm,
+                              ojComponent: {component: 'ojButton', label: 'Comfirm', chroming: 'full'},
+                              css: 'login-btn'"/>
+                </div>
+
+                <input id="submit1" type="submit" data-bind="click: addItem,
+                              ojComponent: {component: 'ojButton', label: 'Add a project', chroming: 'full'},
+                              css: 'login-btn'"/>
+                <input id="submit2" type="submit" data-bind="click: saveAllItem,
+                              ojComponent: {component: 'ojButton', label: 'Save current data', chroming: 'full'},
+                              css: 'login-btn'"/>
+            </div>
+
+
+            <div id="listviewContainer" style="z-index: 90;">
+
+                <!--<strong data-bind="text: action"></strong>-->
+
+                <oj-list-view id="listview" aria-label="swipe to reveal on listview item" style="width:100%;height:50vh"
+                              data="[[dataSource]]" item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('template')]]">
+                    <oj-menu slot="contextMenu" style="display:none" aria-label="Swipe Actions" on-oj-action="[[handleMenuItemAction]]" on-oj-before-open="[[handleMenuBeforeOpen]]">
+                        <!--<oj-option id="edit">Tag</oj-option>-->
+                        <oj-option id="delete">Delete</oj-option>
+                    </oj-menu>
+                </oj-list-view>
+            </div>
+
+            <script type="text/html" id="template">
+                <li style="padding:0" data-bind="attr: {id: id}" class="item-marker">
+                    <div class="oj-offcanvas-outer-wrapper">
+                        <div class="oj-offcanvas-inner-wrapper">
+                            <div style="padding:0.8571rem">
+                                <span>Project: </span>   <span class="oj-flex-item" data-bind="text: path"></span>
+                                <div><span>Height: </span><span class="oj-text-sm oj-text-primary-color" data-bind="text: height"></span></div>
+                            </div>
+
+                            <div tabIndex="-1" data-bind="attr: {id: 'second_toolbar_'+id}" class="oj-offcanvas-end" style="width:225px">
+                                <!--<div data-bind="click: $parent.handleFlag" class="oj-swipetoreveal-flag">-->
+                                    <!--<div class="oj-flex-bar" style="height:100%">-->
+                                        <!--<div class="oj-flex-bar-center-absolute">-->
+                                            <!--<div class="oj-flex oj-sm-flex-direction-column">-->
+                                                <!--<div title=".demo-library-icon-24" role="img" class="oj-flex-item demo-edit-icon-24 demo-icon-font-24"></div>-->
+                                                <!--<div style="padding-top: 10px" class="oj-flex-item">Edit</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <div data-bind="click: $parent.handleTrash" class="oj-swipetoreveal-alert oj-swipetoreveal-default">
+                                    <div class="oj-flex-bar" style="height:100%">
+                                        <div class="oj-flex-bar-center-absolute">
+                                            <div class="oj-flex oj-sm-flex-direction-column">
+                                                <div title=".demo-library-icon-24" role="img" class="oj-flex-item demo-garbage-icon-24 demo-icon-font-24"></div>
+                                                <div style="padding-top: 10px" class="oj-flex-item">Delete</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </script>
+        </div>
+    </div>
+</div>

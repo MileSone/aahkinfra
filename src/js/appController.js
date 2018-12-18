@@ -24,6 +24,7 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'ojs/ojknockout', 'ojs/oj
                 'login': {label: 'Login'},
                 'dashboard': {label: 'Baggage'},
                 'incidents': {label: 'Apron'},
+                'settings': {label: 'Settings'},
                 'customers': {label: 'Customers'}
             });
 
