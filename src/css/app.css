@@ -390,6 +390,7 @@ html{
 }
 
 .demo-setting{
+    padding-top: 3px;
     content:url("images/settingicon.png");
 }
 
@@ -568,6 +569,8 @@ html{
     z-index: 999;
     border-radius: 10px;
     margin-bottom: 10px;
+    position: fixed;
+    width: calc( 100% - 30px);
 }
 
 .oj-navigationlist-horizontal.oj-navigationlist-stack-icon-label:not(.oj-navigationlist-icon-only) .oj-navigationlist-item {

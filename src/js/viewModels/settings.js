@@ -19,7 +19,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                 setTimeout(function () {
                     oj.Router.rootInstance.go('dashboard');
                 },2000)
-
             }
 
             self.navlistValues = [
@@ -139,12 +138,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             self.singClickFunc = function(){
                 setTimeout(function () {
                     singleClick = true;
+                    $('#navlistset')[0].disabled = false;
                 },1000);
             }
 
             self.valuechangehandler = function (e) {
                 if (singleClick == true){
                     singleClick = false;
+                    $('#navlistset')[0].disabled = true;
                     // console.log(e);
                     if (self.ourData) {
                         console.log(self.ourData);
