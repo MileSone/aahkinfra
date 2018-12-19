@@ -43,15 +43,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             };
 
             self.addFuncBindingHtml = function (sTab) {
-                // console.log(sTab);
+                console.log(self.addHeight());
                 self.isOpenAddItemWindow(false);
+
                 var newData = new Array();
                 switch (sTab) {
                     case 1:
                         newData = self.ourData.baggage;
                         var counter = newData.length + 1;
                         var aObject = {
-                            "id": "project" + counter,
+                            "id": "baggage" + counter,
                             "path": self.addPath(),
                             "height": self.addHeight()
                         }
@@ -63,7 +64,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         newData = self.ourData.apron;
                         var counter = newData.length + 1;
                         var aObject = {
-                            "id": "project" + counter,
+                            "id": "apron" + counter,
                             "path": self.addPath(),
                             "height": self.addHeight()
                         }
@@ -75,7 +76,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         newData = self.ourData.flight;
                         var counter = newData.length + 1;
                         var aObject = {
-                            "id": "project" + counter,
+                            "id": "flight" + counter,
                             "path": self.addPath(),
                             "height": self.addHeight()
                         }
@@ -87,7 +88,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         newData = self.ourData.lt;
                         var counter = newData.length + 1;
                         var aObject = {
-                            "id": "project" + counter,
+                            "id": "lt" + counter,
                             "path": self.addPath(),
                             "height": self.addHeight()
                         }
@@ -99,7 +100,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         newData = self.ourData.ferry;
                         var counter = newData.length + 1;
                         var aObject = {
-                            "id": "project" + counter,
+                            "id": "ferry" + counter,
                             "path": self.addPath(),
                             "height": self.addHeight()
                         }
@@ -138,11 +139,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             self.singClickFunc = function(){
                 setTimeout(function () {
                     singleClick = true;
-                },500);
+                },1000);
             }
-            self.valuechangehandler = function (e) {
 
-                if (singleClick == true) {
+            self.valuechangehandler = function (e) {
+                if (singleClick == true){
                     singleClick = false;
                     // console.log(e);
                     if (self.ourData) {
@@ -179,20 +180,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                     } else {
                         return self.allItems([
                             {
-                                "id": "project1",
+                                "id": "Baggage1",
                                 "path": "/shared/EAP/Baggage",
                                 "height": "100%",
                             },
                             {
-                                "id": "project2",
+                                "id": "Baggage2",
                                 "path": "/shared/EAP/Baggage",
                                 "height": "100%",
                             }
                         ])
                     }
-
                 }
-
             }
 
 
@@ -221,12 +220,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                 } else {
                     return self.allItems([
                         {
-                            "id": "project1",
+                            "id": "Baggage1",
                             "path": "/shared/EAP/Baggage",
                             "height": "100%",
                         },
                         {
-                            "id": "project2",
+                            "id": "Baggage2",
                             "path": "/shared/EAP/Baggage",
                             "height": "100%",
                         }
@@ -237,9 +236,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             self.allItemsFunc();
 
             self.addItem = function () {
-                self.isOpenAddItemWindow(true);
-                self.addPath();
-                self.addHeight();
+                if(!self.isOpenAddItemWindow()){
+                    self.isOpenAddItemWindow(true);
+                    self.addPath("");
+                    self.addHeight("");
+                }else{
+                    self.isOpenAddItemWindow(false);
+                    self.addPath("");
+                    self.addHeight("");
+                }
+
             };
 
             self.editItem = function () {
@@ -336,6 +342,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
 
             this.handleTrash = function (data, event) {
                 self.handleAction("second", "trash", event);
+                console.log(self.currentItem);
                 self.remove(self.currentItem);
             };
 

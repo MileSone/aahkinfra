@@ -19,60 +19,40 @@ define(['ojs/ojcore', 'jquery'],
             var defaultData = {
                 "baggage": [
                     {
-                        "id": "project1",
+                        "id": "baggage1",
                         "path": "/shared/EAP/Baggage",
                         "height": "100vh",
                     },
                     {
-                        "id": "project2",
-                        "path": "/shared/EAP/Baggage",
+                        "id": "baggage2",
+                        "path": "/shared/EAP/Passenger",
                         "height": "100vh",
                     }
                 ],
                 "apron": [
                     {
-                        "id": "project1",
-                        "path": "/shared/EAP/Baggage1",
-                        "height": "100vh",
-                    },
-                    {
-                        "id": "project2",
-                        "path": "/shared/EAP/Baggage",
+                        "id": "apron1",
+                        "path": "/shared/EAP/Passenger",
                         "height": "100vh",
                     }
                 ],
                 "flight": [
                     {
-                        "id": "project1",
-                        "path": "/shared/EAP/Baggage2",
-                        "height": "100vh",
-                    },
-                    {
-                        "id": "project2",
+                        "id": "flight1",
                         "path": "/shared/EAP/Baggage",
                         "height": "100vh",
                     }
                 ],
                 "lt": [
                     {
-                        "id": "project1",
-                        "path": "/shared/EAP/Baggage3",
-                        "height": "100vh",
-                    },
-                    {
-                        "id": "project2",
+                        "id": "lt1",
                         "path": "/shared/EAP/Baggage",
                         "height": "100vh",
                     }
                 ],
                 "ferry": [
                     {
-                        "id": "project1",
-                        "path": "/shared/EAP/Baggage4",
-                        "height": "100vh",
-                    },
-                    {
-                        "id": "project2",
+                        "id": "ferry1",
                         "path": "/shared/EAP/Baggage",
                         "height": "100vh",
                     }

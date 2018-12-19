@@ -77,7 +77,7 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
 
                         // Bind your ViewModel for the content of the whole page body.
                         ko.applyBindings(app, document.getElementById('globalBody'));
-                        
+
                         var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=false', {
                             clearsessioncache: false,
                             clearcache: false

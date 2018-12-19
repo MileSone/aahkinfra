@@ -9,7 +9,7 @@
          ** Please see the Oracle JET Cookbook App Shell: Hybrid Mobile demos for
          ** more information on how to use this pattern.
       -->
-        <header role="banner" class="oj-hybrid-applayout-header" >
+        <header role="banner" class="oj-hybrid-applayout-header" style="z-index: 9999;">
             <div class="oj-flex-bar-start">
                 <div data-bind="click: goBack">
                     <i class="oj-navigationlist-item-icon fa demo-icon-font-22 demo_backBtn" style="-webkit-text-fill-color: white;"></i>
@@ -25,6 +25,17 @@
     <div class="oj-applayout-content">
         <div role="main" class="oj-hybrid-applayout-content" style="margin-top: 7px;">
 
+            <div class="bottomInputSession" data-bind="visible: isOpenAddItemWindow">
+                <oj-label show-required for="input1">project path</oj-label>
+                <oj-input-text id="input1" required value={{addPath}}></oj-input-text>
+                <oj-label show-required for="input2">dv height</oj-label>
+                <oj-input-text id="input2" required value={{addHeight}}></oj-input-text>
+
+                <input id="submit3" type="submit" data-bind="click: addComfirm,
+                              ojComponent: {component: 'ojButton', label: 'Comfirm', chroming: 'full'},
+                              css: 'login-btn'"/>
+            </div>
+
             <div style="width: 100%;text-align: center">
                 <oj-buttonset-one id="navlistset" value="{{navvalue}}" focus-management="none" on-value-changed="[[valuechangehandler]]">
                     <!-- ko foreach: navlistValues -->
@@ -36,16 +47,7 @@
             </div>
 
             <div style="position: absolute;width: calc( 100% - 20px);padding: 10px;bottom: 80px;z-index: 99;">
-                <div class="bottomInputSession" data-bind="visible: isOpenAddItemWindow">
-                    <oj-label show-required for="input1">project path</oj-label>
-                    <oj-input-text id="input1" required value={{addPath}}></oj-input-text>
-                    <oj-label show-required for="input2">dv height</oj-label>
-                    <oj-input-text id="input2" required value={{addHeight}}></oj-input-text>
 
-                    <input id="submit3" type="submit" data-bind="click: addComfirm,
-                              ojComponent: {component: 'ojButton', label: 'Comfirm', chroming: 'full'},
-                              css: 'login-btn'"/>
-                </div>
 
                 <input id="submit1" type="submit" data-bind="click: addItem,
                               ojComponent: {component: 'ojButton', label: 'Add a project in current tab', chroming: 'full'},

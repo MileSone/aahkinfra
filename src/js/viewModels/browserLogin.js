@@ -14,39 +14,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController','ojs/ojbutton', 'ojs
             // Header Config
             self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
 
-            // Below are a subset of the ViewModel methods invoked by the ojModule binding
-            // Please reference the ojModule jsDoc for additional available .
-            self.loginAction = function () {
-                var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=yes', {
-                    clearsessioncache: false,
-                    clearcache: false
-                });
-                browser.addEventListener("loadstop", function (url) {
-                    console.log('url is' + JSON.stringify(url));
-                    if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')) {
-                        $.ajax({
-                            url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
-                            dataType: "script",
-                            success: function () {
-                                browser.close();
-                                browser = undefined;
-                                oj.Router.sync().then(
-                                    function () {
-                                        // Bind your ViewModel for the content of the whole page body.
-                                        ko.applyBindings(app, document.getElementById('globalBody'));
-                                        setTimeout(function () {
-                                            oj.Router.rootInstance.go('dashboard');
-                                        }, 2000);
-                                    },
-                                    function (error) {
-                                        oj.Logger.error('Error in root start: ' + error.message);
-                                    }
-                                );
-                            }
-                        });
-                    }
-                });
-            }
+
             /**
              * Optional ViewModel method invoked when this ViewModel is about to be
              * used for the View transition.  The application can put data fetch logic

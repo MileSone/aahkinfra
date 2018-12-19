@@ -74,7 +74,10 @@ html{
     padding-left: calc(0.625rem - 3px);
     border-width: 0 0 0 3px;
     margin-right: 0.625rem;
+    margin-top: 3px !important;
+    font-size: 27px!important;
 }
+
 .demo-logout-label{
     color: #c0c4c8;
 }
@@ -564,8 +567,22 @@ html{
     background-color: #ffffff;
     z-index: 999;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .oj-navigationlist-horizontal.oj-navigationlist-stack-icon-label:not(.oj-navigationlist-icon-only) .oj-navigationlist-item {
     padding-bottom: 0px !important;
+}
+
+#settingPage .oj-inputtext,#settingPage .oj-inputpassword, .oj-textarea,#settingPage .oj-inputtext-nocomp,#settingPage .oj-inputpassword-nocomp,#settingPage .oj-textarea-nocomp {
+     border-bottom: 1px solid gray;
+}
+
+.oj-hybrid.oj-platform-ios.oj-platform-cordova.oj-hybrid-statusbar-spacer .oj-hybrid-applayout-header, .oj-hybrid.oj-platform-ios.oj-platform-cordova.oj-hybrid-statusbar-spacer .oj-hybrid-applayout-header-no-border {
+    padding-top: 34px !important;
+    min-height: 64px  !important;
+}
+
+.oj-hybrid.oj-platform-ios.oj-platform-cordova.oj-hybrid-statusbar-spacer .oj-hybrid-applayout-header .oj-hybrid-applayout-header-title, .oj-hybrid.oj-platform-ios.oj-platform-cordova.oj-hybrid-statusbar-spacer .oj-hybrid-applayout-header-no-border .oj-hybrid-applayout-header-title {
+    margin-top: 30px  !important;
 }
