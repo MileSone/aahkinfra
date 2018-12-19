@@ -36,6 +36,18 @@
                               css: 'login-btn'"/>
             </div>
 
+
+            <div class="bottomInputSession" data-bind="visible: isOpenEditItemWindow">
+                <oj-label show-required for="input1">project path</oj-label>
+                <oj-input-text id="input1" required value={{addPath}}></oj-input-text>
+                <oj-label for="input2">dv height</oj-label>
+                <oj-input-text id="input2" required value={{addHeight}} on-value-changed="[[textvaluechangehandler]]"></oj-input-text>
+
+                <input id="submit4" type="submit" data-bind="click: editComfirm,
+                              ojComponent: {component: 'ojButton', label: 'Comfirm', chroming: 'full'},
+                              css: 'login-btn'"/>
+            </div>
+
             <div style="width: 100%;text-align: center">
                 <oj-buttonset-one id="navlistset" value="{{navvalue}}" focus-management="none" on-value-changed="[[valuechangehandler]]">
                     <!-- ko foreach: navlistValues -->
@@ -65,7 +77,7 @@
                 <oj-list-view id="listview" aria-label="swipe to reveal on listview item" style="width:100%;height:50vh"
                               data="[[dataSource]]" item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('template')]]">
                     <oj-menu slot="contextMenu" style="display:none" aria-label="Swipe Actions" on-oj-action="[[handleMenuItemAction]]" on-oj-before-open="[[handleMenuBeforeOpen]]">
-                        <!--<oj-option id="edit">Tag</oj-option>-->
+                        <oj-option id="edit">Edit</oj-option>
                         <oj-option id="delete">Delete</oj-option>
                     </oj-menu>
                 </oj-list-view>

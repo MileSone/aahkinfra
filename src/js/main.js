@@ -85,6 +85,9 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
                 };
 
 
+
+
+
                 oj.Router.sync().then(
                     function () {
 
@@ -105,7 +108,7 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
                                     dataType: "script",
                                     success: function () {
                                         loginBrowser.close();
-                                        loginBrowser = null;
+                                        loginBrowser = undefined;
 
                                         setTimeout(function () {
                                             oj.Router.rootInstance.go('dashboard');

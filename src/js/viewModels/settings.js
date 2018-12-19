@@ -18,9 +18,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             self.goBack = function () {
                 setTimeout(function () {
                     oj.Router.rootInstance.go('dashboard');
-                },2000)
-
+                }, 2000)
             }
+
+            self.editData = "";
 
             self.navlistValues = [
                 {id: 'Baggage', label: 'Baggage'},
@@ -31,6 +32,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             ];
 
             self.isOpenAddItemWindow = ko.observable(false);
+            self.isOpenEditItemWindow = ko.observable(false);
             self.navvalue = ko.observable("Baggage");
             self.addPath = ko.observable("");
             self.addHeight = ko.observable("");
@@ -42,15 +44,106 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                 oj.Router.rootInstance.go('dashboard');
             };
 
+
+            self.editFuncBindingHTML = function (sTab) {
+                var newData = new Array();
+                switch (sTab) {
+                    case 1:
+                        newData = self.ourData.baggage;
+                        var tempID = self.currentItem[0].id;
+                        for (var m = 0; m < newData.length; m++) {
+                            if (tempID == newData[m].id) {
+                                var aObject = {
+                                    "id": tempID,
+                                    "path": self.addPath(),
+                                    "height": self.addHeight()
+                                }
+                                newData.splice(m, 1, aObject);
+                            }
+                        }
+                        self.allItems(newData);
+                        self.ourData.baggage = newData;
+                        return false;
+                    case 2:
+                        newData = self.ourData.apron;
+                        var tempID = self.currentItem[0].id;
+                        for (var m = 0; m < newData.length; m++) {
+                            if (tempID == newData[m].id) {
+                                var aObject = {
+                                    "id": tempID,
+                                    "path": self.addPath(),
+                                    "height": self.addHeight()
+                                }
+                                newData.splice(m, 1, aObject);
+                            }
+                        }
+                        self.allItems(newData);
+                        self.ourData.apron = newData;
+                        return false;
+                    case 3:
+                        newData = self.ourData.flight;
+                        var tempID = self.currentItem[0].id;
+                        for (var m = 0; m < newData.length; m++) {
+                            if (tempID == newData[m].id) {
+                                var aObject = {
+                                    "id": tempID,
+                                    "path": self.addPath(),
+                                    "height": self.addHeight()
+                                }
+                                newData.splice(m, 1, aObject);
+                            }
+                        }
+                        self.allItems(newData);
+                        self.ourData.flight = newData;
+                        return false;
+                    case 4:
+                        newData = self.ourData.lt;
+                        var tempID = self.currentItem[0].id;
+                        for (var m = 0; m < newData.length; m++) {
+                            if (tempID == newData[m].id) {
+                                var aObject = {
+                                    "id": tempID,
+                                    "path": self.addPath(),
+                                    "height": self.addHeight()
+                                }
+                                newData.splice(m, 1, aObject);
+                            }
+                        }
+                        self.allItems(newData);
+                        self.ourData.lt = newData;
+                        return false;
+                    case 5:
+                        newData = self.ourData.ferry;
+                        var tempID = self.currentItem[0].id;
+                        for (var m = 0; m < newData.length; m++) {
+                            if (tempID == newData[m].id) {
+                                var aObject = {
+                                    "id": tempID,
+                                    "path": self.addPath(),
+                                    "height": self.addHeight()
+                                }
+                                newData.splice(m, 1, aObject);
+                            }
+                        }
+                        self.allItems(newData);
+                        self.ourData.ferry = newData;
+                        return false;
+                }
+            }
+
             self.addFuncBindingHtml = function (sTab) {
-                console.log(self.addHeight());
+                // console.log(self.addHeight());
                 self.isOpenAddItemWindow(false);
 
                 var newData = new Array();
                 switch (sTab) {
                     case 1:
                         newData = self.ourData.baggage;
-                        var counter = newData.length + 1;
+                        if (newData.length != 0) {
+                            counter = parseInt(newData[newData.length - 1].id.substr(7)) + 1;
+                        } else {
+                            counter = 0;
+                        }
                         var aObject = {
                             "id": "baggage" + counter,
                             "path": self.addPath(),
@@ -62,7 +155,13 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         return false;
                     case 2:
                         newData = self.ourData.apron;
-                        var counter = newData.length + 1;
+                        console.log(newData.length);
+                        var counter;
+                        if (newData.length != 0) {
+                            counter = parseInt(newData[newData.length - 1].id.substr(5)) + 1;
+                        } else {
+                            counter = 0;
+                        }
                         var aObject = {
                             "id": "apron" + counter,
                             "path": self.addPath(),
@@ -74,7 +173,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         return false;
                     case 3:
                         newData = self.ourData.flight;
-                        var counter = newData.length + 1;
+                        if (newData.length != 0) {
+                            counter = parseInt(newData[newData.length - 1].id.substr(6)) + 1;
+                        } else {
+                            counter = 0;
+                        }
                         var aObject = {
                             "id": "flight" + counter,
                             "path": self.addPath(),
@@ -86,7 +189,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         return false;
                     case 4:
                         newData = self.ourData.lt;
-                        var counter = newData.length + 1;
+                        if (newData.length != 0) {
+                            counter = parseInt(newData[newData.length - 1].id.substr(2)) + 1;
+                        } else {
+                            counter = 0;
+                        }
                         var aObject = {
                             "id": "lt" + counter,
                             "path": self.addPath(),
@@ -98,7 +205,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         return false;
                     case 5:
                         newData = self.ourData.ferry;
-                        var counter = newData.length + 1;
+                        if (newData.length != 0) {
+                            counter = parseInt(newData[newData.length - 1].id.substr(5)) + 1;
+                        } else {
+                            counter = 0;
+                        }
                         var aObject = {
                             "id": "ferry" + counter,
                             "path": self.addPath(),
@@ -111,24 +222,58 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                 }
             };
 
-            self.addComfirm = function () {
-                switch (self.currentTab()) {
-                    case "Baggage":
-                        self.addFuncBindingHtml(1);
-                        return false;
-                    case "Apron":
-                        self.addFuncBindingHtml(2);
-                        return false;
-                    case "Flight":
-                        self.addFuncBindingHtml(3);
-                        return false;
-                    case "Land Transport":
-                        self.addFuncBindingHtml(4);
-                        return false;
-                    case "Ferry":
-                        self.addFuncBindingHtml(5);
-                        return false;
+            self.editComfirm = function () {
+
+                if (self.addHeight()) {
+                    self.isOpenEditItemWindow(false);
+                    switch (self.currentTab()) {
+                        case "Baggage":
+                            self.editFuncBindingHTML(1);
+                            return false;
+                        case "Apron":
+                            self.editFuncBindingHTML(2);
+                            return false;
+                        case "Flight":
+                            self.editFuncBindingHTML(3);
+                            return false;
+                        case "Land Transport":
+                            self.editFuncBindingHTML(4);
+                            return false;
+                        case "Ferry":
+                            self.editFuncBindingHTML(5);
+                            return false;
+                    }
+                } else {
+                    console.log("need enter a Height for porject");
                 }
+            };
+
+            self.addComfirm = function () {
+                $("#submit3")[0].focus();
+                setTimeout(function(){
+                    if (self.addHeight()) {
+                        switch (self.currentTab()) {
+                            case "Baggage":
+                                self.addFuncBindingHtml(1);
+                                return false;
+                            case "Apron":
+                                self.addFuncBindingHtml(2);
+                                return false;
+                            case "Flight":
+                                self.addFuncBindingHtml(3);
+                                return false;
+                            case "Land Transport":
+                                self.addFuncBindingHtml(4);
+                                return false;
+                            case "Ferry":
+                                self.addFuncBindingHtml(5);
+                                return false;
+                        }
+
+                    } else {
+                        console.log("need enter a Height for porject");
+                    }
+                },1);
             };
 
             self.allItems = ko.observableArray([]);
@@ -136,15 +281,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             var singleClick = true;
 
 
-            self.singClickFunc = function(){
+            self.singClickFunc = function () {
                 setTimeout(function () {
                     singleClick = true;
-                },1000);
+                    $('#navlistset')[0].disabled = false;
+                }, 1000);
             }
 
             self.valuechangehandler = function (e) {
-                if (singleClick == true){
+                if (singleClick == true) {
                     singleClick = false;
+                    $('#navlistset')[0].disabled = true;
                     // console.log(e);
                     if (self.ourData) {
                         console.log(self.ourData);
@@ -195,6 +342,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             }
 
 
+            self.textvaluechangehandler = function (handle) {
+                console.log(handle);
+                console.log(self.addHeight());
+            };
+
+
             self.allItemsFunc = function () {
                 if (self.ourData) {
                     console.log(self.ourData);
@@ -236,22 +389,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             self.allItemsFunc();
 
             self.addItem = function () {
-                if(!self.isOpenAddItemWindow()){
+                self.isOpenEditItemWindow(false);
+                if (!self.isOpenAddItemWindow()) {
                     self.isOpenAddItemWindow(true);
                     self.addPath("");
                     self.addHeight("");
-                }else{
+                } else {
                     self.isOpenAddItemWindow(false);
                     self.addPath("");
                     self.addHeight("");
                 }
 
-            };
-
-            self.editItem = function () {
-                self.isOpenAddItemWindow(true);
-                self.addPath();
-                self.addHeight();
             };
 
             this.dataSource = new oj.ArrayTableDataSource(this.allItems, {idAttribute: "id"});
@@ -292,7 +440,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                     oj.SwipeToRevealUtils.tearDownSwipeActions(endOffcanvas);
                 });
             };
-
+// self.currentData;
             this.handleMenuBeforeOpen = function (event) {
                 var target = event.detail.originalEvent.target;
                 var context = document.getElementById("listview").getContextByNode(target);
@@ -302,11 +450,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                 else {
                     self.currentItem = null;
                 }
+
+                // self.currentData =
             };
 
             this.handleMenuItemAction = function (event) {
                 var id = event.target.id;
-
                 if (id == "edit")
                     self.handleFlag();
                 else if (id == "delete")
@@ -316,7 +465,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             this.closeToolbar = function (which, item) {
                 var toolbarId = "#" + which + "_toolbar_" + item.prop("id");
                 var drawer = {"displayMode": "push", "selector": toolbarId};
-
                 oj.OffcanvasUtils.close(drawer);
             };
 
@@ -335,9 +483,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             };
 
             this.handleFlag = function (data, event) {
+                self.editData = self.currentItem[0].id;
+                self.isOpenEditItemWindow(true);
                 self.handleAction("second", "edit", event);
-                self.addPath(self.currentItem.prop("path"));
-                self.addHeight(self.currentItem.prop("height"));
+                console.log(self.currentItem[0].innerText);
+                var tempVar = self.currentItem[0].innerText;
+                var t1 = "Height: ";
+                var t2 = "Project: ";
+                var n1 = tempVar.indexOf(t1);
+                var n0 = tempVar.indexOf(t2);
+                console.log(n1);
+                var newPro = tempVar.substring(n0 + 8, n1);
+                var newHeight = tempVar.substring(n1 + 7);
+                self.addPath(newPro);
+                self.addHeight(newHeight);
             };
 
             this.handleTrash = function (data, event) {
@@ -367,6 +526,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                     return (current.id == item.prop("id"));
                 });
             };
+
+            self.edit = function () {
+                self.allItems.splice(function (current) {
+                    console.log(current.id);
+                    console.log(current);
+                    return true;
+                });
+            }
 
 
             self.handleActivated = function (info) {
