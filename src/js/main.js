@@ -61,8 +61,21 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
 
                 self.logout = function () {
                     if (confirm("logout ?")) {
-                        // app.isLoggedIn(false);
-                        oj.Router.rootInstance.go('browserLogin');
+                        var logoutBrowser = cordova.InAppBrowser.open('https://idcs-0bc004ec4ded45978582d9fe03e10190.identity.oraclecloud.com/sso/v1/user/logout', '_blank', 'location=false', {
+                            clearsessioncache: false,
+                            clearcache: false
+                        });
+                        logoutBrowser.addEventListener("loadstop", function (url) {
+                            console.log('url is' + JSON.stringify(url));
+                            if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')) {
+                                logoutBrowser.close();
+                                logoutBrowser = null;
+
+                                setTimeout(function () {
+                                    oj.Router.rootInstance.go('dashboard');
+                                }, 3000);
+                            }
+                        });
                     }
                 };
 
@@ -78,12 +91,12 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
                         // Bind your ViewModel for the content of the whole page body.
                         ko.applyBindings(app, document.getElementById('globalBody'));
 
-                        var browser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=false', {
+                        var loginBrowser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=false', {
                             clearsessioncache: false,
                             clearcache: false
                         });
 
-                        browser.addEventListener("loadstop", function (url) {
+                        loginBrowser.addEventListener("loadstop", function (url) {
                             console.log('url is' + JSON.stringify(url));
                             if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')) {
 
@@ -91,9 +104,8 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
                                     url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
                                     dataType: "script",
                                     success: function () {
-                                        browser.close();
-                                        browser = undefined;
-
+                                        loginBrowser.close();
+                                        loginBrowser = null;
 
                                         setTimeout(function () {
                                             oj.Router.rootInstance.go('dashboard');
