@@ -44,7 +44,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                 oj.Router.rootInstance.go('dashboard');
             };
 
-
             self.editFuncBindingHTML = function (sTab) {
                 var newData = new Array();
                 switch (sTab) {
@@ -55,8 +54,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                             if (tempID == newData[m].id) {
                                 var aObject = {
                                     "id": tempID,
-                                    "path": self.addPath(),
-                                    "height": self.addHeight()
+                                    "path": self.addPath().trim(),
+                                    "height": self.addHeight().trim()
                                 }
                                 newData.splice(m, 1, aObject);
                             }
@@ -71,8 +70,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                             if (tempID == newData[m].id) {
                                 var aObject = {
                                     "id": tempID,
-                                    "path": self.addPath(),
-                                    "height": self.addHeight()
+                                    "path": self.addPath().trim(),
+                                    "height": self.addHeight().trim()
                                 }
                                 newData.splice(m, 1, aObject);
                             }
@@ -87,8 +86,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                             if (tempID == newData[m].id) {
                                 var aObject = {
                                     "id": tempID,
-                                    "path": self.addPath(),
-                                    "height": self.addHeight()
+                                    "path": self.addPath().trim(),
+                                    "height": self.addHeight().trim()
                                 }
                                 newData.splice(m, 1, aObject);
                             }
@@ -103,8 +102,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                             if (tempID == newData[m].id) {
                                 var aObject = {
                                     "id": tempID,
-                                    "path": self.addPath(),
-                                    "height": self.addHeight()
+                                    "path": self.addPath().trim(),
+                                    "height": self.addHeight().trim()
                                 }
                                 newData.splice(m, 1, aObject);
                             }
@@ -119,8 +118,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                             if (tempID == newData[m].id) {
                                 var aObject = {
                                     "id": tempID,
-                                    "path": self.addPath(),
-                                    "height": self.addHeight()
+                                    "path": self.addPath().trim(),
+                                    "height": self.addHeight().trim()
                                 }
                                 newData.splice(m, 1, aObject);
                             }
@@ -146,8 +145,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         }
                         var aObject = {
                             "id": "baggage" + counter,
-                            "path": self.addPath(),
-                            "height": self.addHeight()
+                            "path": self.addPath().trim(),
+                            "height": self.addHeight().trim()
                         }
                         newData.push(aObject);
                         self.allItems(newData);
@@ -164,8 +163,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         }
                         var aObject = {
                             "id": "apron" + counter,
-                            "path": self.addPath(),
-                            "height": self.addHeight()
+                            "path": self.addPath().trim(),
+                            "height": self.addHeight().trim()
                         }
                         newData.push(aObject);
                         self.allItems(newData);
@@ -180,8 +179,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         }
                         var aObject = {
                             "id": "flight" + counter,
-                            "path": self.addPath(),
-                            "height": self.addHeight()
+                            "path": self.addPath().trim(),
+                            "height": self.addHeight().trim()
                         }
                         newData.push(aObject);
                         self.allItems(newData);
@@ -196,8 +195,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         }
                         var aObject = {
                             "id": "lt" + counter,
-                            "path": self.addPath(),
-                            "height": self.addHeight()
+                            "path": self.addPath().trim(),
+                            "height": self.addHeight().trim()
                         }
                         newData.push(aObject);
                         self.allItems(newData);
@@ -212,8 +211,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                         }
                         var aObject = {
                             "id": "ferry" + counter,
-                            "path": self.addPath(),
-                            "height": self.addHeight()
+                            "path": self.addPath().trim(),
+                            "height": self.addHeight().trim()
                         }
                         newData.push(aObject);
                         self.allItems(newData);
