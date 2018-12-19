@@ -39,9 +39,9 @@
 
             <div class="bottomInputSession" data-bind="visible: isOpenEditItemWindow">
                 <oj-label show-required for="input1">project path</oj-label>
-                <oj-input-text id="input1" required value={{addPath}}></oj-input-text>
+                <oj-input-text id="input9" required value={{addPath}}></oj-input-text>
                 <oj-label for="input2">dv height</oj-label>
-                <oj-input-text id="input2" required value={{addHeight}} on-value-changed="[[textvaluechangehandler]]"></oj-input-text>
+                <oj-input-text id="input8" required value={{addHeight}} on-value-changed="[[textvaluechangehandler]]"></oj-input-text>
 
                 <input id="submit4" type="submit" data-bind="click: editComfirm,
                               ojComponent: {component: 'ojButton', label: 'Comfirm', chroming: 'full'},
