@@ -68,6 +68,8 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
                         singleClick = false;
 
                         if (confirm("logout ?")) {
+
+                            oj.Router.rootInstance.go('browserLogin');
                             var logoutBrowser = cordova.InAppBrowser.open('https://idcs-0bc004ec4ded45978582d9fe03e10190.identity.oraclecloud.com/sso/v1/user/logout', '_blank', 'location=false', {
                                 clearsessioncache: false,
                                 clearcache: false
@@ -80,7 +82,9 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
                             });
 
                         }
-                        singleClick = true;
+                        setTimeout(function () {
+                            singleClick = true;
+                        },100);
                     }
                 };
 

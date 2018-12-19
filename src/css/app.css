@@ -596,3 +596,10 @@ html{
 .oj-navigationlist-horizontal .oj-navigationlist-item-icon {
     margin: 0;
 }
+
+.loadingfig{
+    margin: 0 auto;
+    margin-top: 120px;
+    content: url("images/loadinggf.gif");
+    max-width: 100%;
+}
