@@ -40,7 +40,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
 
             self.saveAllItem = function () {
                 window.localStorage.setItem("infraData", JSON.stringify(self.ourData));
-                window.location.reload();
+                // window.location.reload();
                 oj.Router.rootInstance.go('dashboard');
             };
 
@@ -222,6 +222,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             };
 
             self.editComfirm = function () {
+                console.log("edting");
                 $("#input8")[0].blur();
                 $("#input9")[0].blur();
                 setTimeout(function () {
@@ -251,6 +252,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             };
 
             self.addComfirm = function () {
+                console.log("edting");
                 $("#input1")[0].blur();
                 $("#input2")[0].blur();
                 setTimeout(function () {
