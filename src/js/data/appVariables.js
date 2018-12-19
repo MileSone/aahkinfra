@@ -22,18 +22,13 @@ define(['ojs/ojcore', 'jquery'],
                         "id": "baggage1",
                         "path": "/shared/EAP/Baggage",
                         "height": "100vh",
-                    },
-                    {
-                        "id": "baggage2",
-                        "path": "/shared/EAP/Passenger",
-                        "height": "100vh",
                     }
                 ],
                 "apron": [
                     {
                         "id": "apron1",
                         "path": "/shared/EAP/Passenger",
-                        "height": "100vh",
+                        "height": "1000px",
                     }
                 ],
                 "flight": [

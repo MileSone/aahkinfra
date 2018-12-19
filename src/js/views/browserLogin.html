@@ -3,21 +3,38 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 <div class="oj-hybrid-applayout-page">
-    <div class="oj-applayout-fixed-top">
-        <!--
+  <div class="oj-applayout-fixed-top">
+    <!--
          ** Oracle JET V4.1.0 hybrid mobile application header pattern.
          ** Please see the Oracle JET Cookbook App Shell: Hybrid Mobile demos for
          ** more information on how to use this pattern.
       -->
-        <header role="banner" class="oj-hybrid-applayout-header" data-bind="ojModule: headerConfig">
-        </header>
-    </div>
-    <!-- This is where your main page content will be loaded -->
-    <div class="oj-applayout-content">
-        <div role="main" class="oj-hybrid-applayout-content">
-            <div class="oj-hybrid-padding">
-                <div role="img" class="loadingfig"></div>
-            </div>
+    <header
+      role="banner"
+      class="oj-hybrid-applayout-header"
+      data-bind="ojModule: headerConfig"
+    ></header>
+  </div>
+  <!-- This is where your main page content will be loaded -->
+  <div class="oj-applayout-content">
+    <div role="main" class="oj-hybrid-applayout-content">
+      <!-- <div class="oj-hybrid-padding"> -->
+      <!-- <div role="img" class="loadingfig"></div> -->
+
+      <div
+        class="oj-flex oj-sm-flex-wrap-nowrap oj-sm-flex-items-initial oj-sm-justify-content-center oj-sm-flex-direction-column"
+        style="height:90vh;"
+      >
+        <div class="oj-flex-item oj-sm-align-self-center">
+          <div class="bi_loadingImg"></div>
         </div>
+        <div class="oj-flex-item oj-sm-align-self-center">
+          <div class="bi_loadingTxt">Loading...</div>
+        </div>
+      </div>
+
+
+
     </div>
+  </div>
 </div>

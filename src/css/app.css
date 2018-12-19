@@ -614,3 +614,17 @@ html{
     bottom: 7px;
     right: 14px;
 }
+
+.bi_loadingImg {
+    vertical-align: middle;
+    background-image: url(images/progress.gif);
+    background-repeat: repeat-x;
+    height: 60px;
+    width: 60px;
+    z-index: 1;
+}
+
+.bi_loadingTxt {
+    font-weight: bold;
+    padding-top: 10px;
+}
