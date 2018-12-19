@@ -15,7 +15,8 @@ requirejs.config(
         // Path mappings for the logical module names
         // Update the main-release-paths.json for release mode when updating the mappings
         paths:
-        //injector:mainReleasePaths
+//injector:mainReleasePaths
+
             {
                 'knockout': 'libs/knockout/knockout-3.4.0.debug',
                 'jquery': 'libs/jquery/jquery-3.1.1',
@@ -32,7 +33,8 @@ requirejs.config(
                 'proj4': 'libs/proj4js/dist/proj4-src',
                 'css': 'libs/require-css/css',
             }
-        //endinjector
+        
+//endinjector
         ,
         // Shim configurations for modules that do not expose AMD
         shim:
@@ -67,13 +69,8 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
                         });
                         logoutBrowser.addEventListener("loadstop", function (url) {
                             console.log('url is' + JSON.stringify(url));
-                            if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')) {
-                                logoutBrowser.close();
-                                logoutBrowser = null;
-
-                                setTimeout(function () {
-                                    oj.Router.rootInstance.go('dashboard');
-                                }, 3000);
+                            if (url.url.startsWith('https://idcs-0bc004ec4ded45978582d9fe03e10190.identity.oraclecloud.com/ui/v1/signin')) {
+                                window.location.reload();
                             }
                         });
                     }
@@ -94,7 +91,7 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
                         // Bind your ViewModel for the content of the whole page body.
                         ko.applyBindings(app, document.getElementById('globalBody'));
 
-                        var loginBrowser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui', '_blank', 'location=false', {
+                        var loginBrowser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/home.jsp?pageid=profile', '_blank', 'location=false', {
                             clearsessioncache: false,
                             clearcache: false
                         });
