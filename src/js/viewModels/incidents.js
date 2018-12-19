@@ -14,6 +14,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
       // Header Config
       self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
         self.dataSource = ko.observableArray();
+
+        self.refreshView = function(){
+            // console.log("ok");
+            self.dataSource([]);
+            setTimeout(function () {
+                if (appVar.infraData.apron) {
+                    self.dataSource(appVar.infraData.apron);
+                }
+            },500)
+        }
       /**
        * Optional ViewModel method invoked after the View is inserted into the
        * document DOM.  The application can put logic that requires the DOM being

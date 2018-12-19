@@ -16,6 +16,16 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             self.dvhtml = ko.observable();
             self.dataSource = ko.observableArray();
 
+
+            self.refreshView = function(){
+                // console.log("ok");
+                self.dataSource([]);
+                setTimeout(function () {
+                    if (appVar.infraData.baggage) {
+                        self.dataSource(appVar.infraData.baggage);
+                    }
+                },500)
+            }
             /**
              * Optional ViewModel method invoked when this ViewModel is about to be
              * used for the View transition.  The application can put data fetch logic
@@ -55,19 +65,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                 var newHtmlString = "";
                 if (appVar.infraData.baggage) {
                     self.dataSource(appVar.infraData.baggage);
-                    // self.dataSource().forEach(function (item) {
-                    //     console.log(item);
-                    //     var tempArray = new Array();
-                    //     tempArray[0] = '<div style="position:absolute;width:100%;height:' + item.height + '"><oracle-dv id="' + item.id + '" project-path="' + item.path + '"';
-                    //     tempArray[1] = " project-options='{";
-                    //     tempArray[2] = '"bDisableMobileLayout":true, "bShowFilterBar"';
-                    //     tempArray[3] = ":false}'></oracle-dv></div>";
-                    //     newHtmlString += tempArray.join("");
-                    // });
-                    // console.log(newHtmlString);
-                    // self.dvhtml(newHtmlString);
-
-                    // document.getElementById("dvContainor1").innerHTML = newHtmlString;
                 }
             };
 

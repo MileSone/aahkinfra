@@ -14,6 +14,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
       // Header Config
       self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
         self.dataSource = ko.observableArray();
+
+        self.refreshView = function(){
+            // console.log("ok");
+            self.dataSource([]);
+            setTimeout(function () {
+                if (appVar.infraData.flight) {
+                    self.dataSource(appVar.infraData.flight);
+                }
+            },500)
+        }
+
+
       self.handleActivated = function(info) {
         // Implement if needed
       };

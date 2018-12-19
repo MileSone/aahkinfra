@@ -15,6 +15,16 @@ function(oj, ko, $, app, appVar) {
       self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
         self.dataSource = ko.observableArray();
 
+        self.refreshView = function(){
+            // console.log("ok");
+            self.dataSource([]);
+            setTimeout(function () {
+                if (appVar.infraData.lt) {
+                    self.dataSource(appVar.infraData.lt);
+                }
+            },500)
+        }
+
       self.handleActivated = function(info) {
         // Implement if needed
       };

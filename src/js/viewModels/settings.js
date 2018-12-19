@@ -38,6 +38,34 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             self.addHeight = ko.observable("");
             self.ourData = appVar.infraData;
 
+            var singleClick = true;
+
+            self.logout = function () {
+                if (singleClick) {
+                    singleClick = false;
+
+                    if (confirm("logout ?")) {
+
+                        oj.Router.rootInstance.go('browserLogin');
+                        var logoutBrowser = cordova.InAppBrowser.open('https://idcs-0bc004ec4ded45978582d9fe03e10190.identity.oraclecloud.com/sso/v1/user/logout', '_blank', 'location=false', {
+                            clearsessioncache: false,
+                            clearcache: false
+                        });
+                        logoutBrowser.addEventListener("loadstop", function (url) {
+                            console.log('url is' + JSON.stringify(url));
+                            if (url.url.startsWith('https://idcs-0bc004ec4ded45978582d9fe03e10190.identity.oraclecloud.com/ui/v1/signin')) {
+                                window.location.reload();
+                            }
+                        });
+
+                    }
+                    setTimeout(function () {
+                        singleClick = true;
+                    },100);
+                }
+            };
+
+
             self.saveAllItem = function () {
                 window.localStorage.setItem("infraData", JSON.stringify(self.ourData));
                 // window.location.reload();
