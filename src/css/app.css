@@ -558,9 +558,6 @@ html{
     width: calc( 100% - 20px );
 }
 
-.oj-inputtext-input{
-    border-bottom: 1px solid gray;
-}
 
 .bottomInputSession{
     border: 1px solid gray;
@@ -571,6 +568,7 @@ html{
     margin-bottom: 10px;
     position: fixed;
     width: calc( 100% - 30px);
+    left: 5px;
 }
 
 .oj-navigationlist-horizontal.oj-navigationlist-stack-icon-label:not(.oj-navigationlist-icon-only) .oj-navigationlist-item {
