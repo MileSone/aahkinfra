@@ -502,7 +502,7 @@ html{
 .demo-icon-font-22 {
     width: 26px;
     height: 26px;
-    margin: 0px 0px 0px 1px;
+    margin: 0px 0px 0px 6px
 }
 
 .oj-selected .oj-navigationlist-focused-element{
@@ -519,6 +519,7 @@ html{
     font-weight: normal;
     font-size: 1.2rem !important;
     color: #fff !important;
+    font-weight: bold !important;
     padding: 0;
     margin: 0;
 }
@@ -586,4 +587,12 @@ html{
 
 .oj-hybrid.oj-platform-ios.oj-platform-cordova.oj-hybrid-statusbar-spacer .oj-hybrid-applayout-header .oj-hybrid-applayout-header-title, .oj-hybrid.oj-platform-ios.oj-platform-cordova.oj-hybrid-statusbar-spacer .oj-hybrid-applayout-header-no-border .oj-hybrid-applayout-header-title {
     margin-top: 30px  !important;
+}
+
+.oj-navigationlist-horizontal.oj-navigationlist-stack-icon-label .oj-navigationlist-item-element {
+    min-height: 4.28571rem;
+}
+
+.oj-navigationlist-horizontal .oj-navigationlist-item-icon {
+    margin: 0;
 }

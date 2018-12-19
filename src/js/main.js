@@ -15,7 +15,7 @@ requirejs.config(
         // Path mappings for the logical module names
         // Update the main-release-paths.json for release mode when updating the mappings
         paths:
-//injector:mainReleasePaths
+        //injector:mainReleasePaths
 
             {
                 'knockout': 'libs/knockout/knockout-3.4.0.debug',
@@ -33,8 +33,8 @@ requirejs.config(
                 'proj4': 'libs/proj4js/dist/proj4-src',
                 'css': 'libs/require-css/css',
             }
-        
-//endinjector
+
+        //endinjector
         ,
         // Shim configurations for modules that do not expose AMD
         shim:
@@ -53,26 +53,34 @@ requirejs.config(
  * by the modules themselves), we are listing them explicitly to get the references to the 'oj' and 'ko'
  * objects in the callback
  */
-require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewModels/dashboard'  ,'ojs/ojknockout', 'ojs/ojmodule', 'ojs/ojrouter', 'ojs/ojnavigationlist'],
-    function (oj, ko, app,appVar, dash) { // this callback gets executed when all required modules are loaded
+require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewModels/dashboard', 'ojs/ojknockout', 'ojs/ojmodule', 'ojs/ojrouter', 'ojs/ojnavigationlist'],
+    function (oj, ko, app, appVar, dash) { // this callback gets executed when all required modules are loaded
 
         // self.isLoading = ko.observable(false);
         $(function () {
 
             function init() {
 
+                var singleClick = true;
+
                 self.logout = function () {
-                    if (confirm("logout ?")) {
-                        var logoutBrowser = cordova.InAppBrowser.open('https://idcs-0bc004ec4ded45978582d9fe03e10190.identity.oraclecloud.com/sso/v1/user/logout', '_blank', 'location=false', {
-                            clearsessioncache: false,
-                            clearcache: false
-                        });
-                        logoutBrowser.addEventListener("loadstop", function (url) {
-                            console.log('url is' + JSON.stringify(url));
-                            if (url.url.startsWith('https://idcs-0bc004ec4ded45978582d9fe03e10190.identity.oraclecloud.com/ui/v1/signin')) {
-                                window.location.reload();
-                            }
-                        });
+                    if (singleClick) {
+                        singleClick = false;
+
+                        if (confirm("logout ?")) {
+                            var logoutBrowser = cordova.InAppBrowser.open('https://idcs-0bc004ec4ded45978582d9fe03e10190.identity.oraclecloud.com/sso/v1/user/logout', '_blank', 'location=false', {
+                                clearsessioncache: false,
+                                clearcache: false
+                            });
+                            logoutBrowser.addEventListener("loadstop", function (url) {
+                                console.log('url is' + JSON.stringify(url));
+                                if (url.url.startsWith('https://idcs-0bc004ec4ded45978582d9fe03e10190.identity.oraclecloud.com/ui/v1/signin')) {
+                                    window.location.reload();
+                                }
+                            });
+
+                        }
+                        singleClick = true;
                     }
                 };
 
@@ -80,9 +88,6 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
                 self.goSettings = function () {
                     oj.Router.rootInstance.go('settings');
                 };
-
-
-
 
 
                 oj.Router.sync().then(
