@@ -16,7 +16,6 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'ojs/ojknockout', 'ojs/oj
             self.isLoggedIn = ko.observable(true);
             // Router setup
             self.router = oj.Router.rootInstance;
-
             self.router.configure({
                 'browserLogin': {label: 'Login', isDefault: true},
                 'about': {label: 'about'},
