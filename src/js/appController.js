@@ -5,8 +5,8 @@
 /*
  * Your application specific code will go here
  */
-define(['ojs/ojcore', 'knockout', 'data/appVariables', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojarraytabledatasource', 'ojs/ojoffcanvas', 'ojs/ojbutton', 'ojs/ojmoduleanimations'],
-    function (oj, ko, appVar) {
+define(['ojs/ojcore', 'knockout', 'data/appVariables','services/wsCall','services/mbe', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojarraytabledatasource', 'ojs/ojoffcanvas', 'ojs/ojbutton', 'ojs/ojmoduleanimations'],
+    function (oj, ko , appVar, ws, mbe) {
         function ControllerViewModel() {
             var self = this;
             self.isLoading = ko.observable(false);
@@ -59,8 +59,10 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'ojs/ojknockout', 'ojs/oj
                     name: 'Flight', id: 'customers',
                     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-dash3-icon'
                 },
-                {name: 'Land Trans', id: 'profile',
-                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-dash4-icon'},
+                {
+                    name: 'Land Trans', id: 'profile',
+                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-dash4-icon'
+                },
                 {
                     name: 'Ferry', id: 'ferry',
                     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-dash5-icon'
@@ -114,6 +116,107 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'ojs/ojknockout', 'ojs/oj
                 // See the override.css file to see when the content area is hidden.
                 contentElem.classList.add('oj-complete');
             }
+
+            var u = navigator.userAgent;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+
+            self.appId = ko.observable("com.oraclecorp.aahkinfraNew");
+            if (isAndroid) {
+            } else if (isiOS) {
+                self.appId("com.oraclecorp.emea.scc.campus.demo")
+            }
+            self.appVersion = ko.observable("1.0.0");
+            self.androidSenderId = ko.observable("412589378698");
+            self.deviceToken = ko.observable("");
+
+
+            self.Mcsusername = "kenneth.choi@oracle.com";
+            self.Mcspassword = "Passw0rd1";
+
+
+            self.loginSuccess = function (response) {
+                self.registerNotification();
+            };
+
+            self.loginFailure = function (statusCode, data) {
+                alert("Login failed! statusCode:" + statusCode + " Message: " + JSON.stringify(data));
+            };
+
+            ws.mcsAuth(self.Mcsusername,self.Mcspassword).then(self.loginSuccess, self.loginFailure);
+
+            self.registerNotification = function () {
+                console.log("Notification register...");
+
+                try {
+                    var push = PushNotification.init({
+                        android: {
+                            senderID: self.androidSenderId()
+                        },
+                        browser: {
+                            pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+                        },
+                        ios: {
+                            alert: "true",
+                            badge: "true",
+                            sound: "true"
+                        },
+                        windows: {}
+                    });
+
+                    push.on('registration', function (data) {
+                        console.log(data.registrationId);
+                        self.deviceToken(data.registrationId);
+                        // self.registrationId(data.registrationId);
+                        alert(data.registrationId);
+                        try {
+                            mbe.registerForNotifications(data.registrationId, self.appId(), self.appVersion(),
+                                function (statusCode, headers, data) {
+                                    alert("Register device successfully!");
+                                }, function (statusCode, data) {
+                                    alert("Register device fail!");
+                                });
+                        } catch (e) {
+                            alert("Register device encounter an exceptionL " + e.message
+                            );
+                        }
+                    });
+
+                    push.on('notification', function (data) {
+                        alert(data.message);
+                        var tempData = data.message;
+                        try {
+                            console.log(tempData);
+                        } catch (e) {
+                            console.log("no ID in notification");
+                        }
+
+                    });
+
+                    push.on('error', function (e) {
+                        alert(e.message, "Error");
+                    });
+                } catch (e) {
+                    alert(e.message, "Error");
+                }
+            };
+
+            self.deregisterForNotifications = function () {
+                if (self.deviceToken()) {
+                    try {
+                        mbe.deregisterForNotifications(self.deviceToken(), self.appId(), self.appVersion(),
+                            function (statusCode, data) {
+                                self.deviceToken("");
+                                alert("Deregister device successfully!");
+                            }, function (statusCode, data) {
+                                alert("Deregister device fail!");
+                            });
+                    } catch (e) {
+                        alert(e.message, "Error");
+                    }
+                }
+            };
+
         }
 
         return new ControllerViewModel();

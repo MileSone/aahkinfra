@@ -33,7 +33,7 @@
 
             <div class="bottomInputSession" data-bind="visible: isOpenAddItemWindow">
                 <oj-label for="input1">project path</oj-label>
-                <oj-input-text id="input1" value={{addPath}}></oj-input-text>
+                <input id="input1" type="text" data-bind="ojComponent: {component: 'ojInputText', value: addPath}"/>
                 <oj-label for="input2">dv height</oj-label>
                 <input id="input2" type="text" data-bind="ojComponent: {component: 'ojInputText', value: addHeight}"/>
 
@@ -45,7 +45,7 @@
 
             <div class="bottomInputSession" data-bind="visible: isOpenEditItemWindow">
                 <oj-label for="input9">project path</oj-label>
-                <oj-input-text id="input9" value={{addPath}}></oj-input-text>
+                <input id="input9" type="text" data-bind="ojComponent: {component: 'ojInputText', value: addPath}"/>
                 <oj-label for="input8">dv height</oj-label>
                 <input id="input8" type="text" data-bind="ojComponent: {component: 'ojInputText', value: addHeight}"/>
 
@@ -99,16 +99,6 @@
                             </div>
 
                             <div tabIndex="-1" data-bind="attr: {id: 'second_toolbar_'+id}" class="oj-offcanvas-end" style="width:225px">
-                                <!--<div data-bind="click: $parent.handleFlag" class="oj-swipetoreveal-flag">-->
-                                <!--<div class="oj-flex-bar" style="height:100%">-->
-                                <!--<div class="oj-flex-bar-center-absolute">-->
-                                <!--<div class="oj-flex oj-sm-flex-direction-column">-->
-                                <!--<div title=".demo-library-icon-24" role="img" class="oj-flex-item demo-edit-icon-24 demo-icon-font-24"></div>-->
-                                <!--<div style="padding-top: 10px" class="oj-flex-item">Edit</div>-->
-                                <!--</div>-->
-                                <!--</div>-->
-                                <!--</div>-->
-                                <!--</div>-->
                                 <div data-bind="click: $parent.handleTrash" class="oj-swipetoreveal-alert oj-swipetoreveal-default">
                                     <div class="oj-flex-bar" style="height:100%">
                                         <div class="oj-flex-bar-center-absolute">

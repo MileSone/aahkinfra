@@ -57,8 +57,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                                 window.location.reload();
                             }
                         });
-
                     }
+
                     setTimeout(function () {
                         singleClick = true;
                     },100);
@@ -250,10 +250,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             };
 
             self.editComfirm = function () {
-                console.log("edting");
-                $("#input8")[0].blur();
-                $("#input9")[0].blur();
-                setTimeout(function () {
+                // console.log("edting");
+                // $("#input8")[0].blur();
+                // $("#input9")[0].blur();
+                // setTimeout(function () {
                     if (self.addHeight()) {
                         self.isOpenEditItemWindow(false);
                         switch (self.currentTab()) {
@@ -276,14 +276,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                     } else {
                         console.log("need enter a Height for porject");
                     }
-                }, 800);
+                // }, 800);
             };
 
             self.addComfirm = function () {
-                console.log("edting");
-                $("#input1")[0].blur();
-                $("#input2")[0].blur();
-                setTimeout(function () {
+                // console.log("edting");
+                // $("#input1")[0].blur();
+                // $("#input2")[0].blur();
+                // setTimeout(function () {
                     if (self.addHeight()) {
                         switch (self.currentTab()) {
                             case "Baggage":
@@ -306,7 +306,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                     } else {
                         console.log("need enter a Height for porject");
                     }
-                }, 800);
+
             };
 
             self.allItems = ko.observableArray([]);
