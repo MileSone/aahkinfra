@@ -9,13 +9,98 @@
        ** Please see the Oracle JET Cookbook App Shell: Hybrid Mobile demos for
        ** more information on how to use this pattern.
     -->
-    <header role="banner" class="oj-hybrid-applayout-header" data-bind="ojModule: headerConfig">
+    <header role="banner" class="oj-hybrid-applayout-header" style="z-index: 9999;">
+      <div class="oj-flex-bar-start">
+        <div data-bind="click: goBack">
+          <i class="oj-navigationlist-item-icon fa demo-icon-font-22 demo_backBtn" style="-webkit-text-fill-color: white;"></i>
+        </div>
+      </div>
+      <div role="heading" class="oj-hybrid-applayout-bar-title">
+        <h1 class="oj-hybrid-applayout-header-title" data-bind="text: pageTitle"></h1>
+        <!--<i class="oj-navigationlist-item-icon demo-icon-font-24 demo-logoheader-icon" style="-webkit-text-fill-color: white;"></i>-->
+      </div>
+      <div class="oj-flex-bar-end">
+        <!--<div data-bind="click: logout">-->
+          <!--<i class="oj-navigationlist-item-icon fa fa-sign-out demo-icon-font-24 demo-logout" style="-webkit-text-fill-color: white;"></i>-->
+        <!--</div>-->
+      </div>
+
     </header>
   </div>
   <!-- This is where your main page content will be loaded -->
   <div class="oj-applayout-content">
     <div role="main" class="oj-hybrid-applayout-content">
-      <div class="oj-hybrid-padding">
+      <div class="oj-hybrid-padding" style="margin-top: 80px;">
+        <h3>Charts settings</h3>
+        <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+
+        <oj-label for='input0'  class="oj-label-inline" style="padding-left: 10px;">User ID</oj-label>
+        <oj-input-text id="input0" value="{{puserID}}" style="padding-left: 10px;padding-right: 10px;"></oj-input-text>
+
+        <div class="oj-flex oj-flex-items-pad">
+          <div class="oj-sm-6 oj-md-6 oj-flex-item">
+            <oj-label for='input1' class="oj-label-inline">First Percent</oj-label>
+            <oj-input-text id="input1" value="{{pchartValue1}}"></oj-input-text>
+          </div>
+          <div class="oj-sm-6 oj-md-6 oj-flex-item">
+            <oj-label for='input2' class="oj-label-inline">Second Percent</oj-label>
+            <oj-input-text id="input2" value="{{pchartValue2}}"></oj-input-text>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 30px;">Server URL</h3>
+        <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+
+        <oj-text-area id="url0" value="{{serverURL}}"></oj-text-area>
+
+        <!--<h3>MCS</h3>-->
+        <!--<hr style="height:1px;border:none;border-top:1px solid #555555;" />-->
+        <!--<div class="oj-flex">-->
+          <!--<div class="oj-flex-item oj-sm-2">-->
+            <!--<input class="demo-loan-login-user" id="config_1"-->
+                   <!--type="text"-->
+                   <!--data-bind="ojComponent: {component: 'ojInputText',-->
+                                           <!--readOnly: true}" >-->
+          <!--</div>-->
+          <!--<div class="oj-flex-item oj-sm-10">-->
+            <!--<input class="demo-loan-login-input" id="config_2"-->
+                   <!--type="text"-->
+                   <!--data-bind="ojComponent: {component: 'ojInputText',-->
+                                               <!--placeholder: oj.Translations.getTranslatedString('user'),-->
+                                          <!--value: username}" >-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="oj-flex" style="margin-top:3px;">-->
+          <!--<div class="oj-flex-item oj-sm-2">-->
+            <!--<input class="demo-loan-login-password" id="config_3"-->
+                   <!--type="text"-->
+                   <!--data-bind="ojComponent: {component: 'ojInputText',-->
+                                           <!--readOnly: true}" >-->
+          <!--</div>-->
+          <!--<div class="oj-flex-item oj-sm-10" style="    z-index: 99;">-->
+            <!--<input type="password" class="demo-loan-login-input"-->
+                   <!--id="password"-->
+                   <!--data-bind="ojComponent: {component: 'ojInputPassword',-->
+                                          <!--placeholder: oj.Translations.getTranslatedString('password'),-->
+                                          <!--value: password}"/>-->
+          <!--</div>-->
+        <!--</div>-->
+
+
+        <!--<div>backend ID</div>-->
+
+        <!--<oj-form-layout id="form-container">-->
+          <!--<oj-input-text id="input" required value="text" label-hint="row 1"></oj-input-text>-->
+          <!--<oj-label id="inputgroup" label-id="inputgrouplabel">row 2</oj-label>-->
+          <!--<oj-input-text id="input2" value="text" label-hint="row 3"></oj-input-text>-->
+        <!--</oj-form-layout>-->
+
+        <!--<input id="backend" type="text" data-bind="ojComponent: {component: 'ojInputText', value: mcsbackend}"/>-->
+
+        <input id="config_btn" style="margin-top: 60px;" type="submit" data-bind="click: saveSettings,
+                              ojComponent: {component: 'ojButton', label: 'Save All & Refresh', chroming: 'full'},
+                              css: 'login-btn'"/>
       </div>
     </div>
   </div>

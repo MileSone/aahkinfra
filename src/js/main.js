@@ -62,6 +62,12 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
         $(function () {
 
             function init() {
+                var localS = window.localStorage.getItem('serverURL');
+                if (localS !== null) {
+                } else {
+                    window.localStorage.setItem("serverURL", 'https://aaoac2-aahkinfra.analytics.ocp.oraclecloud.com');
+                    localS = 'https://aaoac2-aahkinfra.analytics.ocp.oraclecloud.com';
+                }
 
                 self.goSettings = function () {
                     oj.Router.rootInstance.go('settings');
@@ -69,26 +75,22 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
 
                 oj.Router.sync().then(
                     function () {
-
                         // Bind your ViewModel for the content of the whole page body.
                         ko.applyBindings(app, document.getElementById('globalBody'));
-
-                        var loginBrowser = cordova.InAppBrowser.open('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/home.jsp?pageid=profile', '_blank', 'location=false', {
+                        var loginBrowser = cordova.InAppBrowser.open(localS + '/dv/ui//home.jsp?pageid=profile', '_blank', 'location=false', {
                             clearsessioncache: false,
                             clearcache: false
                         });
 
                         loginBrowser.addEventListener("loadstop", function (url) {
                             console.log('url is' + JSON.stringify(url));
-                            if (url.url.startsWith('https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui')) {
-
+                            if (url.url.startsWith(localS)) {
                                 $.ajax({
-                                    url: 'https://aaoacintd-aahkinfra.analytics.ocp.oraclecloud.com/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
+                                    url: localS + '/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
                                     dataType: "script",
                                     success: function () {
                                         loginBrowser.close();
                                         loginBrowser = undefined;
-
                                         setTimeout(function () {
                                             oj.Router.rootInstance.go('dashboard');
                                         }, 3000);

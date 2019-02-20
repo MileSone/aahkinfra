@@ -1,4 +1,4 @@
-/* 
+/*
     Document   : override
     Created on : <date>
     Author     : <author>
@@ -12,8 +12,8 @@ html{
 #oracle-dv .bitech{
     height: 100vh !important;
 }
-/* Hides the content area until we are ready to display after paddings have been adjusted. 
-    oj-complete is a marker class that is applied by the appController 
+/* Hides the content area until we are ready to display after paddings have been adjusted.
+    oj-complete is a marker class that is applied by the appController
     after adjusting the content area. */
 .oj-applayout-content:not(.oj-complete) {
     /*visibility: hidden;*/
@@ -47,23 +47,23 @@ html{
 
 
 .demo-james-icon {
-  width: 80px;
-  height: 80px;
-  display: block;
-  padding-top: 24px;
-  padding-bottom: 16px;
-  margin-left: auto;
-  margin-right: auto;
+    width: 80px;
+    height: 80px;
+    display: block;
+    padding-top: 24px;
+    padding-bottom: 16px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .demo-icon-font-24{
     font-size:24px!important;
 }
 .demo-profile-name {
-  font-size: 1.714rem;
-  text-align: center;
-  color: #ffffff;
-  margin: 0;
-  padding-bottom: 42px;
+    font-size: 1.714rem;
+    text-align: center;
+    color: #ffffff;
+    margin: 0;
+    padding-bottom: 42px;
 }
 .demo-hr{
     width:40%;
@@ -83,11 +83,11 @@ html{
 }
 
 .demo-app-name {
-  padding-top: 40px;
-  color: #979899;
+    padding-top: 40px;
+    color: #979899;
 }
 
-.demo-loading-icon{ 
+.demo-loading-icon{
     margin-top: auto;
     margin-bottom: auto;
     color: pink;
@@ -304,7 +304,7 @@ html{
     margin:5px;
 }
 .demo-loan-page{
-    background: white; /* For browsers that do not support gradients */    
+    background: white; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left bottom, #cdcccc, white); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(top right, #cdcccc, white); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(top right, #cdcccc, white); /* For Firefox 3.6 to 15 */
@@ -343,7 +343,7 @@ html{
     font-size:20px;
 }
 .demo-loan-login-user{
-    background-image:url(images/user.png); 
+    background-image:url(images/user.png);
     background-size: 18px;
     background-repeat: no-repeat;
     background-position: 6px;
@@ -352,7 +352,7 @@ html{
     height:35px;
 }
 .demo-loan-login-password{
-    background-image:url(images/password.png); 
+    background-image:url(images/password.png);
     background-size: 18px;
     background-repeat: no-repeat;
     background-position: 6px;
@@ -450,8 +450,8 @@ html{
 
 
 .demo-dash3-icon{
-     content:url("images/dash3.png");
- }
+    content:url("images/dash3.png");
+}
 
 
 .oj-selected  .demo-dash3-icon {
@@ -477,8 +477,27 @@ html{
 }
 
 
+
 .oj-selected .demo-dash4-icon{
     content:url("images/dash4_p.png");
+    background-color: #0a47a2!important;
+    border-color: #0a47a2!important;
+}
+
+.demo-setting-n {
+    content: url(images/settingicon_n.png);
+    width: 26px;
+    height: 26px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.demo-setting {
+    content: url(images/settingicon.png);
+}
+
+.oj-selected .demo-setting-n {
+    content: url(images/settingicon.png);
     background-color: #0a47a2!important;
     border-color: #0a47a2!important;
 }
@@ -504,9 +523,9 @@ html{
 }
 
 .demo-icon-font-22 {
-    width: 26px;
-    height: 26px;
-    margin: 0px 0px 0px 6px
+    width: 22px;
+    height: 22px;
+    margin: 0px 0px 0px 10px;
 }
 
 .oj-selected .oj-navigationlist-focused-element{
@@ -581,7 +600,7 @@ html{
 }
 
 #settingPage .oj-inputtext,#settingPage .oj-inputpassword, .oj-textarea,#settingPage .oj-inputtext-nocomp,#settingPage .oj-inputpassword-nocomp,#settingPage .oj-textarea-nocomp {
-     border-bottom: 1px solid gray;
+    border-bottom: 1px solid gray;
 }
 
 .oj-hybrid.oj-platform-ios.oj-platform-cordova.oj-hybrid-statusbar-spacer .oj-hybrid-applayout-header, .oj-hybrid.oj-platform-ios.oj-platform-cordova.oj-hybrid-statusbar-spacer .oj-hybrid-applayout-header-no-border {
@@ -611,8 +630,8 @@ html{
 .navBarEndBtn{
     position: absolute;
     z-index: 9999;
-    bottom: 7px;
-    right: 14px;
+    bottom: 8px;
+    right: 16px;
 }
 
 .bi_loadingImg {
@@ -627,4 +646,9 @@ html{
 .bi_loadingTxt {
     font-weight: bold;
     padding-top: 10px;
+}
+
+
+.oj-inputtext, .oj-inputpassword, .oj-textarea, .oj-inputtext-nocomp, .oj-inputpassword-nocomp, .oj-textarea-nocomp {
+    max-width: 30em !important;
 }

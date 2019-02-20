@@ -9,6 +9,25 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables','services/wsCall','service
     function (oj, ko , appVar, ws, mbe) {
         function ControllerViewModel() {
             var self = this;
+            var u = navigator.userAgent;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+
+
+            self.appId = ko.observable("com.oraclecorp.aahkinfraNew");
+            // if (isAndroid) {
+            // } else if (isiOS) {
+                self.appId("com.oraclecorp.emea.scc.campus.demo")
+            // }
+            self.appVersion = ko.observable("1.0.0");
+            self.androidSenderId = ko.observable("412589378698");
+            self.deviceToken = ko.observable("");
+
+
+            self.Mcsusername = "raymond.y.leung@oracle.com";
+            self.Mcspassword = "comeWel1!";
+
+
             self.isLoading = ko.observable(false);
             // Save the theme so we can perform platform specific navigational animations
             var platform = oj.ThemeUtils.getThemeTargetPlatform();
@@ -25,7 +44,8 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables','services/wsCall','service
                 'incidents': {label: 'Apron'},
                 'settings': {label: 'Settings'},
                 'ferry': {label: 'Ferry'},
-                'customers': {label: 'Flight'}
+                'customers': {label: 'Flight'},
+                'about': {label: 'config'}
             });
 
             oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
@@ -66,6 +86,10 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables','services/wsCall','service
                 {
                     name: 'Ferry', id: 'ferry',
                     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-dash5-icon'
+                },
+                {
+                    name: 'Config', id: 'about',
+                    iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-setting-n'
                 }];
 
             self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});
@@ -117,22 +141,6 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables','services/wsCall','service
                 contentElem.classList.add('oj-complete');
             }
 
-            var u = navigator.userAgent;
-            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
-            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-
-            self.appId = ko.observable("com.oraclecorp.aahkinfraNew");
-            if (isAndroid) {
-            } else if (isiOS) {
-                self.appId("com.oraclecorp.emea.scc.campus.demo")
-            }
-            self.appVersion = ko.observable("1.0.0");
-            self.androidSenderId = ko.observable("412589378698");
-            self.deviceToken = ko.observable("");
-
-
-            self.Mcsusername = "kenneth.choi@oracle.com";
-            self.Mcspassword = "Passw0rd1";
 
 
             self.loginSuccess = function (response) {
