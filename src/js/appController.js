@@ -191,13 +191,32 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables','services/wsCall','service
                     });
 
                     push.on('notification', function (data) {
-                        alert(data.message);
+//                        alert(data.message);
                         var tempData = data.message;
                         try {
-                            console.log(tempData);
+                            var num = tempData.indexOf('---');
+                            var tabName = tempData.substring(0,num);
+                            var newM = tempData.substr(num+3);
+                            alert(newM);
+                            
+                            if(tabName.trim().toUpperCase() == "BAGGAGE"){
+                            oj.Router.rootInstance.go('dashboard');
+                            }else if(tabName.trim().toUpperCase() == "APRON"){
+                              oj.Router.rootInstance.go('incidents');
+                            }else if(tabName.trim().toUpperCase() == "FLIGHT"){
+                              oj.Router.rootInstance.go('customers');
+                            }else if(tabName.trim().toUpperCase() == "LANDTRANS"){
+                              oj.Router.rootInstance.go('profile');
+                            }else if(tabName.trim().toUpperCase() == "FERRY"){
+                              oj.Router.rootInstance.go('ferry');
+                            }
+                            
                         } catch (e) {
+                            
+                            alert(data.message);
                             console.log("no ID in notification");
                         }
+                            
 
                     });
 

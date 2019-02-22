@@ -52,25 +52,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'services/mbe','ojs
 
 
             self.saveSettings = function () {
-                $("#input1")[0].blur();
-                $("#input2")[0].blur();
-                $("#url0")[0].blur();
-                window.localStorage.setItem("serverURL",  self.serverURL());
-                var jsonData = {
-                    "userId":self.puserID(),
-                    "firstPercent":parseInt(self.pchartValue1()),
-                    "lastPercent":parseInt(self.pchartValue2())
-                }
-
-                mbe.invokeCustomAPI('notification/userThreshold', 'PUT', JSON.stringify(jsonData), function (state,data) {
-                    if(data.status == "success"){
-                       alert("Saving success");
-                        window.localStorage.setItem("ADWuserID", self.puserID());
-                        oj.Router.rootInstance.go('dashboard');
-                    }
-                }, function (e) {
-                    console.log('error', e);
-                });
+       $("#input1")[0].blur();
+       $("#input2")[0].blur();
+       $("#url0")[0].blur();
+       
+       
+       setTimeout(function () {
+ 
+                  window.localStorage.setItem("serverURL",  self.serverURL());
+                  var jsonData = {
+                  "userId":self.puserID(),
+                  "firstPercent":parseInt(self.pchartValue1()),
+                  "lastPercent":parseInt(self.pchartValue2())
+                  }
+                  
+                  mbe.invokeCustomAPI('notification/userThreshold', 'PUT', JSON.stringify(jsonData), function (state,data) {
+                                      if(data.status == "success"){
+                                      alert("Saving success");
+                                      window.localStorage.setItem("ADWuserID", self.puserID());
+                                      oj.Router.rootInstance.go('dashboard');
+                                      }
+                                      }, function (e) {
+                                      console.log('error', e);
+                                      });
+                  },500)
+       
+       
             }
 
             self.goBack = function () {

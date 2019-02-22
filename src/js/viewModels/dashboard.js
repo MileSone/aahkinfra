@@ -18,14 +18,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
 
 
             self.refreshView = function(){
-                // console.log("ok");
                 self.dataSource([]);
                 setTimeout(function () {
                     if (appVar.infraData.baggage) {
                         self.dataSource(appVar.infraData.baggage);
                     }
                 },500)
+       
+       if($("#otr_div")){
+       setTimeout(function(){
+                  console.log("otr_div clicked");
+                  
+                  var obj =$(".timerDiv");
+                  for(var c=0; c<obj.length;c++ ){
+                  $(".timerDiv")[c].click();
+                  }
+                   },6000);
+       }
             }
+       
+       
+//       $("#otr_div").
             /**
              * Optional ViewModel method invoked when this ViewModel is about to be
              * used for the View transition.  The application can put data fetch logic
@@ -38,6 +51,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
              * the promise is resolved
              */
             self.handleActivated = function (info) {
+       
+       
+       if($("#otr_div")){
+       setTimeout(function(){
+                  console.log("otr_div clicked");
+                  
+                  var obj =$(".timerDiv");
+                  for(var c=0; c<obj.length;c++ ){
+                  $(".timerDiv")[c].click();
+                  }
+                  },6000);
+       }
+       
+       
+      
             };
 
             /**

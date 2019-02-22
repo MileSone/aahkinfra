@@ -15,7 +15,8 @@ requirejs.config(
         // Path mappings for the logical module names
         // Update the main-release-paths.json for release mode when updating the mappings
         paths:
-        //injector:mainReleasePaths
+//injector:mainReleasePaths
+
 
             {
                 'knockout': 'libs/knockout/knockout-3.4.0.debug',
@@ -36,7 +37,8 @@ requirejs.config(
                 'mcs_config':'mcs/oracle_mobile_cloud_config'
             }
 
-        //endinjector
+        
+//endinjector
         ,
         // Shim configurations for modules that do not expose AMD
         shim:

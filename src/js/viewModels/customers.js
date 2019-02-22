@@ -23,11 +23,35 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                     self.dataSource(appVar.infraData.flight);
                 }
             },500)
+       
+       
+       if($("#otr_div")){
+       setTimeout(function(){
+                  console.log("otr_div clicked");
+                  
+                  var obj =$(".timerDiv");
+                  for(var c=0; c<obj.length;c++ ){
+                  $(".timerDiv")[c].click();
+                  }
+                  },6000);
+       }
+       
         }
 
 
       self.handleActivated = function(info) {
         // Implement if needed
+       if($("#otr_div")){
+       setTimeout(function(){
+                  console.log("otr_div clicked");
+                  
+                  var obj =$(".timerDiv");
+                  for(var c=0; c<obj.length;c++ ){
+                  $(".timerDiv")[c].click();
+                  }
+                  },6000);
+       }
+       
       };
 
       /**
