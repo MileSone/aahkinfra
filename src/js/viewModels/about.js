@@ -52,6 +52,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'services/mbe','ojs
 
 
             self.saveSettings = function () {
+                $("#input1")[0].blur();
+                $("#input2")[0].blur();
+                $("#url0")[0].blur();
                 window.localStorage.setItem("serverURL",  self.serverURL());
                 var jsonData = {
                     "userId":self.puserID(),
