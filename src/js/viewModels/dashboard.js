@@ -17,27 +17,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             self.dataSource = ko.observableArray();
 
 
-            self.refreshView = function(){
+            self.refreshView = function () {
                 self.dataSource([]);
                 setTimeout(function () {
                     if (appVar.infraData.baggage) {
                         self.dataSource(appVar.infraData.baggage);
                     }
-                },500)
-       
-       if($("#otr_div")){
-       setTimeout(function(){
-                  console.log("otr_div clicked");
-                  
-                  var obj =$(".timerDiv");
-                  for(var c=0; c<obj.length;c++ ){
-                  $(".timerDiv")[c].click();
-                  }
-                   },6000);
-       }
+                }, 500)
+
+                if ($("#otr_div")) {
+                    setTimeout(function () {
+                        console.log("otr_div clicked");
+
+                        var obj = $(".timerDiv");
+                        for (var c = 0; c < obj.length; c++) {
+                            $(".timerDiv")[c].click();
+                        }
+                    }, 6000);
+                }
             }
-       
-       
+
+
 //       $("#otr_div").
             /**
              * Optional ViewModel method invoked when this ViewModel is about to be
@@ -51,21 +51,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
              * the promise is resolved
              */
             self.handleActivated = function (info) {
-       
-       
-       if($("#otr_div")){
-       setTimeout(function(){
-                  console.log("otr_div clicked");
-                  
-                  var obj =$(".timerDiv");
-                  for(var c=0; c<obj.length;c++ ){
-                  $(".timerDiv")[c].click();
-                  }
-                  },6000);
-       }
-       
-       
-      
+
+
+                if ($("#otr_div")) {
+                    setTimeout(function () {
+                        console.log("otr_div clicked");
+
+                        var obj = $(".timerDiv");
+                        for (var c = 0; c < obj.length; c++) {
+                            $(".timerDiv")[c].click();
+                        }
+                    }, 6000);
+                }
+
+
             };
 
             /**

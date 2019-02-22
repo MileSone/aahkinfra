@@ -5,8 +5,8 @@
 /*
  * Your application specific code will go here
  */
-define(['ojs/ojcore', 'knockout', 'data/appVariables','services/wsCall','services/mbe', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojarraytabledatasource', 'ojs/ojoffcanvas', 'ojs/ojbutton', 'ojs/ojmoduleanimations'],
-    function (oj, ko , appVar, ws, mbe) {
+define(['ojs/ojcore', 'knockout', 'data/appVariables', 'services/wsCall', 'services/mbe', 'ojs/ojknockout', 'ojs/ojrouter', 'ojs/ojarraytabledatasource', 'ojs/ojoffcanvas', 'ojs/ojbutton', 'ojs/ojmoduleanimations'],
+    function (oj, ko, appVar, ws, mbe) {
         function ControllerViewModel() {
             var self = this;
             var u = navigator.userAgent;
@@ -17,7 +17,7 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables','services/wsCall','service
             self.appId = ko.observable("com.oraclecorp.aahkinfraNew");
             // if (isAndroid) {
             // } else if (isiOS) {
-                self.appId("com.oraclecorp.emea.scc.campus.demo")
+            self.appId("com.oraclecorp.emea.scc.campus.demo")
             // }
             self.appVersion = ko.observable("1.0.0");
             self.androidSenderId = ko.observable("412589378698");
@@ -142,7 +142,6 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables','services/wsCall','service
             }
 
 
-
             self.loginSuccess = function (response) {
                 self.registerNotification();
             };
@@ -151,7 +150,7 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables','services/wsCall','service
                 alert("Login failed! statusCode:" + statusCode + " Message: " + JSON.stringify(data));
             };
 
-            ws.mcsAuth(self.Mcsusername,self.Mcspassword).then(self.loginSuccess, self.loginFailure);
+            ws.mcsAuth(self.Mcsusername, self.Mcspassword).then(self.loginSuccess, self.loginFailure);
 
             self.registerNotification = function () {
                 console.log("Notification register...");
@@ -195,28 +194,28 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables','services/wsCall','service
                         var tempData = data.message;
                         try {
                             var num = tempData.indexOf('---');
-                            var tabName = tempData.substring(0,num);
-                            var newM = tempData.substr(num+3);
+                            var tabName = tempData.substring(0, num);
+                            var newM = tempData.substr(num + 3);
                             alert(newM);
-                            
-                            if(tabName.trim().toUpperCase() == "BAGGAGE"){
-                            oj.Router.rootInstance.go('dashboard');
-                            }else if(tabName.trim().toUpperCase() == "APRON"){
-                              oj.Router.rootInstance.go('incidents');
-                            }else if(tabName.trim().toUpperCase() == "FLIGHT"){
-                              oj.Router.rootInstance.go('customers');
-                            }else if(tabName.trim().toUpperCase() == "LANDTRANS"){
-                              oj.Router.rootInstance.go('profile');
-                            }else if(tabName.trim().toUpperCase() == "FERRY"){
-                              oj.Router.rootInstance.go('ferry');
+
+                            if (tabName.trim().toUpperCase() == "BAGGAGE") {
+                                oj.Router.rootInstance.go('dashboard');
+                            } else if (tabName.trim().toUpperCase() == "APRON") {
+                                oj.Router.rootInstance.go('incidents');
+                            } else if (tabName.trim().toUpperCase() == "FLIGHT") {
+                                oj.Router.rootInstance.go('customers');
+                            } else if (tabName.trim().toUpperCase() == "LANDTRANS") {
+                                oj.Router.rootInstance.go('profile');
+                            } else if (tabName.trim().toUpperCase() == "FERRY") {
+                                oj.Router.rootInstance.go('ferry');
                             }
-                            
+
                         } catch (e) {
-                            
+
                             alert(data.message);
                             console.log("no ID in notification");
                         }
-                            
+
 
                     });
 

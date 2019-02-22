@@ -61,7 +61,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
 
                     setTimeout(function () {
                         singleClick = true;
-                    },100);
+                    }, 100);
                 }
             };
 
@@ -254,28 +254,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                 // $("#input8")[0].blur();
                 // $("#input9")[0].blur();
                 // setTimeout(function () {
-                    if (self.addHeight()) {
-                        self.isOpenEditItemWindow(false);
-                        switch (self.currentTab()) {
-                            case "Baggage":
-                                self.editFuncBindingHTML(1);
-                                return false;
-                            case "Apron":
-                                self.editFuncBindingHTML(2);
-                                return false;
-                            case "Flight":
-                                self.editFuncBindingHTML(3);
-                                return false;
-                            case "Land Transport":
-                                self.editFuncBindingHTML(4);
-                                return false;
-                            case "Ferry":
-                                self.editFuncBindingHTML(5);
-                                return false;
-                        }
-                    } else {
-                        console.log("need enter a Height for porject");
+                if (self.addHeight()) {
+                    self.isOpenEditItemWindow(false);
+                    switch (self.currentTab()) {
+                        case "Baggage":
+                            self.editFuncBindingHTML(1);
+                            return false;
+                        case "Apron":
+                            self.editFuncBindingHTML(2);
+                            return false;
+                        case "Flight":
+                            self.editFuncBindingHTML(3);
+                            return false;
+                        case "Land Transport":
+                            self.editFuncBindingHTML(4);
+                            return false;
+                        case "Ferry":
+                            self.editFuncBindingHTML(5);
+                            return false;
                     }
+                } else {
+                    console.log("need enter a Height for porject");
+                }
                 // }, 800);
             };
 
@@ -284,28 +284,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
                 // $("#input1")[0].blur();
                 // $("#input2")[0].blur();
                 // setTimeout(function () {
-                    if (self.addHeight()) {
-                        switch (self.currentTab()) {
-                            case "Baggage":
-                                self.addFuncBindingHtml(1);
-                                return false;
-                            case "Apron":
-                                self.addFuncBindingHtml(2);
-                                return false;
-                            case "Flight":
-                                self.addFuncBindingHtml(3);
-                                return false;
-                            case "Land Transport":
-                                self.addFuncBindingHtml(4);
-                                return false;
-                            case "Ferry":
-                                self.addFuncBindingHtml(5);
-                                return false;
-                        }
-
-                    } else {
-                        console.log("need enter a Height for porject");
+                if (self.addHeight()) {
+                    switch (self.currentTab()) {
+                        case "Baggage":
+                            self.addFuncBindingHtml(1);
+                            return false;
+                        case "Apron":
+                            self.addFuncBindingHtml(2);
+                            return false;
+                        case "Flight":
+                            self.addFuncBindingHtml(3);
+                            return false;
+                        case "Land Transport":
+                            self.addFuncBindingHtml(4);
+                            return false;
+                        case "Ferry":
+                            self.addFuncBindingHtml(5);
+                            return false;
                     }
+
+                } else {
+                    console.log("need enter a Height for porject");
+                }
 
             };
 

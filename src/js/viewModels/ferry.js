@@ -16,40 +16,40 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             self.dataSource = ko.observableArray();
 
 
-            self.refreshView = function(){
+            self.refreshView = function () {
                 // console.log("ok");
                 self.dataSource([]);
                 setTimeout(function () {
                     if (appVar.infraData.ferry) {
                         self.dataSource(appVar.infraData.ferry);
                     }
-                },500)
-       if($("#otr_div")){
-       setTimeout(function(){
-                  console.log("otr_div clicked");
-                  
-                  var obj =$(".timerDiv");
-                  for(var c=0; c<obj.length;c++ ){
-                  $(".timerDiv")[c].click();
-                  }
-                  },6000);
-       }
-       
+                }, 500)
+                if ($("#otr_div")) {
+                    setTimeout(function () {
+                        console.log("otr_div clicked");
+
+                        var obj = $(".timerDiv");
+                        for (var c = 0; c < obj.length; c++) {
+                            $(".timerDiv")[c].click();
+                        }
+                    }, 6000);
+                }
+
             }
             self.handleActivated = function (info) {
                 // Implement if needed
-       
-       if($("#otr_div")){
-       setTimeout(function(){
-                  console.log("otr_div clicked");
-                  
-                  var obj =$(".timerDiv");
-                  for(var c=0; c<obj.length;c++ ){
-                  $(".timerDiv")[c].click();
-                  }
-                  },6000);
-       }
-       
+
+                if ($("#otr_div")) {
+                    setTimeout(function () {
+                        console.log("otr_div clicked");
+
+                        var obj = $(".timerDiv");
+                        for (var c = 0; c < obj.length; c++) {
+                            $(".timerDiv")[c].click();
+                        }
+                    }, 6000);
+                }
+
             };
 
             /**

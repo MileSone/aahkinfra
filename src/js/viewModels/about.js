@@ -5,7 +5,7 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'services/mbe','ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojlabel'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'services/mbe', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojlabel'],
     function (oj, ko, $, app, mbe) {
 
         function AboutViewModel() {
@@ -21,8 +21,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'services/mbe','ojs
 
             self.pchartValue1 = ko.observable("");
             self.pchartValue2 = ko.observable("");
-            self.puserID = ko.observable("stephen.pun@oracle.com");
-
+            self.puserID = ko.observable("raymond.y.leung@oracle.com");
+//stephen.pun@oracle.com
             self.loadPage = function () {
                 var localS = window.localStorage.getItem('serverURL');
                 var loUserID = window.localStorage.getItem('ADWuserID');
@@ -41,7 +41,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'services/mbe','ojs
                     self.serverURL('https://aaoac2-aahkinfra.analytics.ocp.oraclecloud.com');
                 }
 
-                mbe.invokeCustomAPI('notification/userThreshold/' + self.puserID(), 'GET', null, function (resp,data) {
+                mbe.invokeCustomAPI('notification/userThreshold/' + self.puserID(), 'GET', null, function (resp, data) {
                     console.log(data);
                     self.pchartValue1(data.firstPercent);
                     self.pchartValue2(data.lastPercent);
@@ -52,32 +52,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'services/mbe','ojs
 
 
             self.saveSettings = function () {
-       $("#input1")[0].blur();
-       $("#input2")[0].blur();
-       $("#url0")[0].blur();
-       
-       
-       setTimeout(function () {
- 
-                  window.localStorage.setItem("serverURL",  self.serverURL());
-                  var jsonData = {
-                  "userId":self.puserID(),
-                  "firstPercent":parseInt(self.pchartValue1()),
-                  "lastPercent":parseInt(self.pchartValue2())
-                  }
-                  
-                  mbe.invokeCustomAPI('notification/userThreshold', 'PUT', JSON.stringify(jsonData), function (state,data) {
-                                      if(data.status == "success"){
-                                      alert("Saving success");
-                                      window.localStorage.setItem("ADWuserID", self.puserID());
-                                      oj.Router.rootInstance.go('dashboard');
-                                      }
-                                      }, function (e) {
-                                      console.log('error', e);
-                                      });
-                  },500)
-       
-       
+                $("#input1")[0].blur();
+                $("#input2")[0].blur();
+                $("#url0")[0].blur();
+
+
+                setTimeout(function () {
+
+                    window.localStorage.setItem("serverURL", self.serverURL());
+                    var jsonData = {
+                        "userId": self.puserID(),
+                        "firstPercent": parseInt(self.pchartValue1()),
+                        "lastPercent": parseInt(self.pchartValue2())
+                    }
+
+                    mbe.invokeCustomAPI('notification/userThreshold', 'PUT', JSON.stringify(jsonData), function (state, data) {
+                        if (data.status == "success") {
+                            alert("Saving success");
+                            window.localStorage.setItem("ADWuserID", self.puserID());
+                            oj.Router.rootInstance.go('dashboard');
+                        }
+                    }, function (e) {
+                        console.log('error', e);
+                    });
+                }, 500)
+
+
             }
 
             self.goBack = function () {
