@@ -33,11 +33,11 @@ requirejs.config(
                 'customElements': 'libs/webcomponents/custom-elements.min',
                 'proj4': 'libs/proj4js/dist/proj4-src',
                 'css': 'libs/require-css/css',
-                'mcs':'mcs/mcs',
-                'mcs_config':'mcs/oracle_mobile_cloud_config'
+                'mcs': 'mcs/mcs',
+                'mcs_config': 'mcs/oracle_mobile_cloud_config'
             }
 
-        
+
 //endinjector
         ,
         // Shim configurations for modules that do not expose AMD
@@ -75,41 +75,77 @@ require(['ojs/ojcore', 'knockout', 'appController', 'data/appVariables', 'viewMo
                     oj.Router.rootInstance.go('settings');
                 };
 
-                oj.Router.sync().then(
-                    function () {
-                        // Bind your ViewModel for the content of the whole page body.
-                        ko.applyBindings(app, document.getElementById('globalBody'));
-                        var loginBrowser = cordova.InAppBrowser.open(localS + '/dv/ui//home.jsp?pageid=profile', '_blank', 'location=false', {
-                            clearsessioncache: false,
-                            clearcache: false
-                        });
+                if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) { //判断iPhone|iPad|iPod|iOS
 
-                        loginBrowser.addEventListener("loadstop", function (url) {
-                            console.log('url is' + JSON.stringify(url));
-                            if (url.url.startsWith(localS)) {
-                                $.ajax({
-                                    url: localS + '/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
-                                    dataType: "script",
-                                    success: function () {
-                                        loginBrowser.close();
-                                        loginBrowser = undefined;
-                                        setTimeout(function () {
-                                            oj.Router.rootInstance.go('dashboard');
-                                        }, 3000);
+                    oj.Router.sync().then(
+                        function () {
+                            // Bind your ViewModel for the content of the whole page body.
+                            ko.applyBindings(app, document.getElementById('globalBody'));
+                            var loginBrowser = cordova.InAppBrowser.open(localS + '/dv/ui//home.jsp?pageid=profile', '_blank', 'location=false', {
+                                clearsessioncache: false,
+                                clearcache: false
+                            });
+
+                            loginBrowser.addEventListener("loadstop", function (url) {
+                                console.log('url is' + JSON.stringify(url));
+                                if (url.url.startsWith(localS)) {
+                                    $.ajax({
+                                        url: localS + '/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
+                                        dataType: "script",
+                                        success: function () {
+                                            console.log("IOS");
+                                            loginBrowser.close();
+                                            loginBrowser = undefined;
+                                            setTimeout(function () {
+                                                oj.Router.rootInstance.go('dashboard');
+                                        }, 10000);
                                     },
                                     function(error) {
-                                        oj.Logger.error('Error in root start: ' + error.message);
-                                    }
-                                });
-                            }
-                        });
+                                            oj.Logger.error('Error in root start: ' + error.message);
+                                        }
+                                    });
+                                }
+                            });
 
-                    },
-                    function (error) {
-                        app.isLoading(false);
-                        oj.Logger.error('Error in root start: ' + error.message);
-                    }
-                );
+                        },
+                        function (error) {
+                            app.isLoading(false);
+                            oj.Logger.error('Error in root start: ' + error.message);
+                        }
+                    );
+
+                } else if (/(Android)/i.test(navigator.userAgent)) {  //判断Android
+                    var browser = cordova.InAppBrowser.open(localS + '/dv/ui//home.jsp?pageid=profile', {
+                        clearsessioncache: false,
+                        clearcache: false});
+                    browser.addEventListener("loadstart", function (url) {
+                        console.log('url is' + JSON.stringify(url));
+                        if (url.url.startsWith(localS)){
+                            $.ajax({
+                                url: localS + '/dv/ui/api/v1/plugins/embedding/jet/embedding.js',
+                                dataType: "script",
+                                success: function () {
+                                    browser.close();
+                                    oj.Router.sync().then(
+                                        function () {
+                                            console.log("Android");
+                                            // Bind your ViewModel for the content of the whole page body.
+                                            ko.applyBindings(app, document.getElementById('globalBody'));
+
+                                            setTimeout(function () {
+                                                oj.Router.rootInstance.go('dashboard');
+                                            }, 5000);
+                                        },
+                                        function (error) {
+                                            oj.Logger.error('Error in root start: ' + error.message);
+                                        }
+                                    );
+                                }
+                            });
+                        }
+                    });
+                }
+
 
             }
 

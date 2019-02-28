@@ -11,48 +11,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
         function CustomerViewModel() {
             var self = this;
 
-            // Header Config
-            self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
-            self.dataSource = ko.observableArray();
-
-            self.refreshView = function () {
-                // console.log("ok");
-                self.dataSource([]);
-                setTimeout(function () {
-                    if (appVar.infraData.flight) {
-                        self.dataSource(appVar.infraData.flight);
-                    }
-                }, 500)
-
-
-                if ($("#otr_div")) {
-                    setTimeout(function () {
-                        console.log("otr_div clicked");
-
-                        var obj = $(".timerDiv");
-                        for (var c = 0; c < obj.length; c++) {
-                            $(".timerDiv")[c].click();
-                        }
-                    }, 6000);
-                }
-
-            }
-
-
-            self.handleActivated = function (info) {
-                // Implement if needed
-                if ($("#otr_div")) {
-                    setTimeout(function () {
-                        console.log("otr_div clicked");
-
-                        var obj = $(".timerDiv");
-                        for (var c = 0; c < obj.length; c++) {
-                            $(".timerDiv")[c].click();
-                        }
-                    }, 6000);
-                }
-
-            };
+       // Header Config
+       self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
+       self.dvhtml = ko.observable();
+       self.dataSource = ko.observableArray([]);
+    
+       self.refreshView = function (){
+       self.dataSource([]);
+       app.refreshView("flight");
+       
+       setTimeout(function(){
+                  self.dataSource(app.dataSource());
+                      app.proformViewClick();
+                  },500);
+   
+       };
+       
+       
+       
+       self.handleActivated = function (info) {
+       app.proformViewClick();
+       };
 
             /**
              * Optional ViewModel method invoked after the View is inserted into the

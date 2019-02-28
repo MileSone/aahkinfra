@@ -14,57 +14,23 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
             // Header Config
             self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
             self.dvhtml = ko.observable();
-            self.dataSource = ko.observableArray();
-
-
-            self.refreshView = function () {
+            self.dataSource = ko.observableArray([]);
+       
+            self.refreshView = function (){
                 self.dataSource([]);
-                setTimeout(function () {
-                    if (appVar.infraData.baggage) {
-                        self.dataSource(appVar.infraData.baggage);
-                    }
-                }, 500)
-
-                if ($("#otr_div")) {
-                    setTimeout(function () {
-                        console.log("otr_div clicked");
-
-                        var obj = $(".timerDiv");
-                        for (var c = 0; c < obj.length; c++) {
-                            $(".timerDiv")[c].click();
-                        }
-                    }, 6000);
-                }
-            }
+                app.refreshView("baggage");
+       
+                setTimeout(function(){
+                        self.dataSource(app.dataSource());
+                        app.proformViewClick();
+                  },500);
+       
+            };
+       
 
 
-//       $("#otr_div").
-            /**
-             * Optional ViewModel method invoked when this ViewModel is about to be
-             * used for the View transition.  The application can put data fetch logic
-             * here that can return a Promise which will delay the handleAttached function
-             * call below until the Promise is resolved.
-             * @param {Object} info - An object with the following key-value pairs:
-             * @param {Node} info.element - DOM element or where the binding is attached. This may be a 'virtual' element (comment node).
-             * @param {Function} info.valueAccessor - The binding's value accessor.
-             * @return {Promise|undefined} - If the callback returns a Promise, the next phase (attaching DOM) will be delayed until
-             * the promise is resolved
-             */
             self.handleActivated = function (info) {
-
-
-                if ($("#otr_div")) {
-                    setTimeout(function () {
-                        console.log("otr_div clicked");
-
-                        var obj = $(".timerDiv");
-                        for (var c = 0; c < obj.length; c++) {
-                            $(".timerDiv")[c].click();
-                        }
-                    }, 6000);
-                }
-
-
+                   app.proformViewClick();
             };
 
             /**
@@ -89,9 +55,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
              * @param {Function} info.valueAccessor - The binding's value accessor.
              */
             self.handleBindingsApplied = function (info) {
-                var newHtmlString = "";
                 if (appVar.infraData.baggage) {
-                    self.dataSource(appVar.infraData.baggage);
+                   self.dataSource(appVar.infraData.baggage);
                 }
             };
 

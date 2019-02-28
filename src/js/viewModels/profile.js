@@ -11,46 +11,28 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
         function ProfileViewModel() {
             var self = this;
 
-            // Header Config
-            self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
-            self.dataSource = ko.observableArray();
-
-            self.refreshView = function () {
-                // console.log("ok");
-                self.dataSource([]);
-                setTimeout(function () {
-                    if (appVar.infraData.lt) {
-                        self.dataSource(appVar.infraData.lt);
-                    }
-                }, 500)
-
-                if ($("#otr_div")) {
-                    setTimeout(function () {
-                        console.log("otr_div clicked");
-
-                        var obj = $(".timerDiv");
-                        for (var c = 0; c < obj.length; c++) {
-                            $(".timerDiv")[c].click();
-                        }
-                    }, 6000);
-                }
-
-            }
-
-            self.handleActivated = function (info) {
-                // Implement if needed
-                if ($("#otr_div")) {
-                    setTimeout(function () {
-                        console.log("otr_div clicked");
-
-                        var obj = $(".timerDiv");
-                        for (var c = 0; c < obj.length; c++) {
-                            $(".timerDiv")[c].click();
-                        }
-                    }, 6000);
-                }
-
-            };
+       // Header Config
+       self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
+       self.dvhtml = ko.observable();
+       self.dataSource = ko.observableArray([]);
+       self.dataSource(app.dataSource());
+       
+       self.refreshView = function (){
+       self.dataSource([]);
+       app.refreshView("landtrans");
+       
+       setTimeout(function(){
+                  self.dataSource(app.dataSource());
+                  app.proformViewClick();
+                  },500);
+       
+       };
+       
+       
+       
+       self.handleActivated = function (info) {
+       app.proformViewClick();
+       };
 
             /**
              * Optional ViewModel method invoked after the View is inserted into the
@@ -75,8 +57,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
              * @param {Function} info.valueAccessor - The binding's value accessor.
              */
             self.handleBindingsApplied = function (info) {
-                if (appVar.infraData.lt) {
-                    self.dataSource(appVar.infraData.lt);
+                if (appVar.infraData.landtrans) {
+                    self.dataSource(appVar.infraData.landtrans);
                 }
             };
 

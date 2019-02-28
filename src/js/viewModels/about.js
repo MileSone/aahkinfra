@@ -22,7 +22,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'services/mbe', 'oj
             self.pchartValue1 = ko.observable("");
             self.pchartValue2 = ko.observable("");
             self.puserID = ko.observable("raymond.y.leung@oracle.com");
-//stephen.pun@oracle.com
+            //stephen.pun@oracle.com
             self.loadPage = function () {
                 var localS = window.localStorage.getItem('serverURL');
                 var loUserID = window.localStorage.getItem('ADWuserID');

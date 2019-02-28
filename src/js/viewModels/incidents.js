@@ -11,31 +11,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
         function IncidentsViewModel() {
             var self = this;
 
-            // Header Config
-            self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
-            self.dataSource = ko.observableArray();
-
-            self.refreshView = function () {
-                // console.log("ok");
-                self.dataSource([]);
-                setTimeout(function () {
-                    if (appVar.infraData.apron) {
-                        self.dataSource(appVar.infraData.apron);
-                    }
-                }, 500)
-
-                if ($("#otr_div")) {
-                    setTimeout(function () {
-                        console.log("otr_div clicked");
-
-                        var obj = $(".timerDiv");
-                        for (var c = 0; c < obj.length; c++) {
-                            $(".timerDiv")[c].click();
-                        }
-                    }, 6000);
-                }
-
-            }
+       // Header Config
+       self.headerConfig = {'viewName': 'header', 'viewModelFactory': app.getHeaderModel()};
+       self.dvhtml = ko.observable();
+       self.dataSource = ko.observableArray([]);
+       
+       self.refreshView = function (){
+       self.dataSource([]);
+       app.refreshView("apron");
+       
+       setTimeout(function(){
+                  self.dataSource(app.dataSource());
+                  app.proformViewClick();
+                  },500);
+       
+       };
+       
+       
+       
+       self.handleActivated = function (info) {
+       app.proformViewClick();
+       };
             /**
              * Optional ViewModel method invoked after the View is inserted into the
              * document DOM.  The application can put logic that requires the DOM being
@@ -46,18 +42,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'appController', 'data/appVariables'
              * @param {boolean} info.fromCache - A boolean indicating whether the module was retrieved from cache.
              */
             self.handleAttached = function (info) {
-                // Implement if needed
-                if ($("#otr_div")) {
-                    setTimeout(function () {
-                        console.log("otr_div clicked");
-
-                        var obj = $(".timerDiv");
-                        for (var c = 0; c < obj.length; c++) {
-                            $(".timerDiv")[c].click();
-                        }
-                    }, 6000);
-                }
-
             };
 
 

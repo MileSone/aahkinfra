@@ -10,22 +10,25 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'services/wsCall', 'servi
         function ControllerViewModel() {
             var self = this;
             var u = navigator.userAgent;
-            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
-            var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-
+ self.dataSource = ko.observableArray();
 
             self.appId = ko.observable("com.oraclecorp.aahkinfraNew");
-            // if (isAndroid) {
-            // } else if (isiOS) {
-            self.appId("com.oraclecorp.emea.scc.campus.demo")
-            // }
+            if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) { //判断iPhone|iPad|iPod|iOS
+                self.Mcsusername = "raymond.y.leung@oracle.com";
+                self.Mcspassword = "comeWel1!";                                             //alert(navigator.userAgent);
+                self.appId("com.oraclecorp.emea.scc.campus.demo")
+            } else if (/(Android)/i.test(navigator.userAgent)) {  //判断Android
+                self.Mcsusername = "stephen.pun@oracle.com";
+                self.Mcspassword = "Oracle123456!";
+            }
+
+
+
+
             self.appVersion = ko.observable("1.0.0");
             self.androidSenderId = ko.observable("412589378698");
             self.deviceToken = ko.observable("");
 
-
-            self.Mcsusername = "raymond.y.leung@oracle.com";
-            self.Mcspassword = "comeWel1!";
 
 
             self.isLoading = ko.observable(false);
@@ -141,14 +144,46 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'services/wsCall', 'servi
                 contentElem.classList.add('oj-complete');
             }
 
+            self.proformViewClick = function () {
+                if ($("#otr_div")) {
+                     setTimeout(function () {
+                        var obj = $(".timerDiv");
+                        for (var c = 0; c < obj.length; c++) {
+                            $(".timerDiv")[c].click();
+                        }
+                     }, 12000);
+                }
+            }
+                self.refreshData = function (tabname) {
+//                    self.dataSource([]);
+//                    setTimeout(function () {
+//                               if (appVar.infraData[tabname]) {
+//                                self.dataSource(appVar.infraData[tabname]);
+//                                }
+//                                }, 500)
+                    self.proformViewClick();
+                }
+       
+            self.refreshView = function (tabname) {
+                    self.dataSource([]);
+                    if (appVar.infraData[tabname]) {
+                        self.dataSource(appVar.infraData[tabname]);
+                    }
+            }
+
+
+
+
 
             self.loginSuccess = function (response) {
                 self.registerNotification();
+
             };
 
             self.loginFailure = function (statusCode, data) {
                 alert("Login failed! statusCode:" + statusCode + " Message: " + JSON.stringify(data));
             };
+
 
             ws.mcsAuth(self.Mcsusername, self.Mcspassword).then(self.loginSuccess, self.loginFailure);
 
@@ -174,12 +209,10 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'services/wsCall', 'servi
                     push.on('registration', function (data) {
                         console.log(data.registrationId);
                         self.deviceToken(data.registrationId);
-                        // self.registrationId(data.registrationId);
-                        alert(data.registrationId);
                         try {
                             mbe.registerForNotifications(data.registrationId, self.appId(), self.appVersion(),
                                 function (statusCode, headers, data) {
-                                    alert("Register device successfully!");
+//                                    alert("Register device successfully!");
                                 }, function (statusCode, data) {
                                     alert("Register device fail!");
                                 });
@@ -188,6 +221,7 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'services/wsCall', 'servi
                             );
                         }
                     });
+
 
                     push.on('notification', function (data) {
 //                        alert(data.message);
@@ -198,17 +232,21 @@ define(['ojs/ojcore', 'knockout', 'data/appVariables', 'services/wsCall', 'servi
                             var newM = tempData.substr(num + 3);
                             alert(newM);
 
-                            if (tabName.trim().toUpperCase() == "BAGGAGE") {
-                                oj.Router.rootInstance.go('dashboard');
-                            } else if (tabName.trim().toUpperCase() == "APRON") {
-                                oj.Router.rootInstance.go('incidents');
-                            } else if (tabName.trim().toUpperCase() == "FLIGHT") {
-                                oj.Router.rootInstance.go('customers');
-                            } else if (tabName.trim().toUpperCase() == "LANDTRANS") {
-                                oj.Router.rootInstance.go('profile');
-                            } else if (tabName.trim().toUpperCase() == "FERRY") {
-                                oj.Router.rootInstance.go('ferry');
-                            }
+                            var tabMap = {
+                                "baggage": "dashboard",
+                                "apron": "incidents",
+                                "flight": "customers",
+                                "landtrans": "profile",
+                                "ferry": "ferry"
+                            };
+
+                            var lowercaseTabName = tabName.trim().toLowerCase();
+                            oj.Router.rootInstance.go(tabMap[lowercaseTabName]).then(function (result) {
+                                if (!result.hasChanged) {
+                                    self.refreshData(lowercaseTabName);
+                                }
+                            });
+
 
                         } catch (e) {
 
